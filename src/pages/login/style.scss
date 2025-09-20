@@ -1,0 +1,80 @@
+.p-Login 
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+
+    h1
+    {
+        font-family: var(--font);
+        font-weight: 400;
+        font-size: 1.7em;
+        text-align: center;
+    }
+
+    div
+    {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        > div:first-of-type
+        {
+            background-color: var(--bcolor-red);
+            width: 100%;
+            height: 50px;
+        }
+
+        form 
+        {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            
+            label 
+            {
+                color: var(--tcolor-main);
+
+                &:nth-of-type(2)
+                {
+                    margin-top: 7px;
+                }
+            }
+
+            input 
+            {
+                width: 450px;
+            }
+
+            button 
+            {
+                margin-top: 15px;
+                background-color: var(--bcolor-gray1);
+                outline: none;
+                border: none;
+                color: var(--tcolor-third);
+                font-weight: 350;
+                padding: 3px;
+                cursor: pointer;
+                padding: 7px 0px;
+            }
+
+            a
+            {
+                text-align: center;
+                font-size: 0.7em;
+                text-decoration: underline;
+                margin-top: 2px;
+            }
+
+            .error 
+            {
+                margin-top: 15px;
+                font-size: 0.85em;
+                text-align: center;
+            }
+        }
+    }
+}

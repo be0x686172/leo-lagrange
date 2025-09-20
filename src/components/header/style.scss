@@ -1,0 +1,48 @@
+.cd-Header 
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 199px;
+    height: 100vh;
+    background-color: var(--bcolor-gray2);
+    padding: 40px 0px 20px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .top 
+    {
+        display: flex;
+        flex-direction: column;
+        gap: 70px;
+
+        .d-title 
+        {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-left: 20px;
+
+            div 
+            {
+                background-color: var(--bcolor-gray3);
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+            }
+
+            h1 
+            {
+                font-size: 0.95em;
+                font-weight: 450;
+            }
+        }
+
+        nav 
+        {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}

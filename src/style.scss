@@ -1,0 +1,69 @@
+// Fonts
+    // Outfit
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+    // Overpass
+@import url('https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root 
+{
+    // Fonts
+    --font: Outfit;
+    --font1: Overpass;
+
+    // Colors
+        // Text
+    --tcolor-main: #373737;
+    --tcolor-second: #878787;
+    --tcolor-third: #FFFFFF;
+        // Background
+    --bcolor-gray1: #373737;
+    --bcolor-gray2: #F2F2F2;
+    --bcolor-gray3: #A1A1A1;
+    --bcolor-white: #FFFFFF;
+}
+
+*
+{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--font);
+    color: var(--tcolor-main);
+}
+
+.page
+{
+    margin-left: 200px;
+    padding: 35px 40px;
+}
+
+img 
+{
+    object-fit: cover;
+    object-position: center;
+}
+
+a 
+{
+    text-decoration: none;
+    color: var(--tcolor-main);
+}
+
+label 
+{
+    font-size: 0.9em;
+}
+
+input
+{
+    color: var(--tcolor-main);
+    border: 1px solid var(--bcolor-gray1);
+    padding: 5px 5px;
+    border-radius: 2px;
+
+    &::placeholder
+    {
+        font-family: var(--font);
+        color: var(--tcolor-second);
+    }
+}
