@@ -3,7 +3,7 @@ import Link from '../link/Link';
 
 const Header = () => {
     return (
-        <div className='component cd-Header'>
+        <div className='component c-Header'>
             <div className='top'>
                 <div className='d-title'>
                     <div className='d-avatar'></div>
@@ -16,7 +16,7 @@ const Header = () => {
                     <Link name="Paramètres" to="/settings" icon="settings" />
                 </nav>
             </div>
-            <Link name="Déconnexion" icon="logout" />
+            <Link name="Déconnexion" to="/logout" icon="logout" />
         </div>
     );
 };
