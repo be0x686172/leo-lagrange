@@ -1,0 +1,19 @@
+.cn-Link
+{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 27px 0px 27px 15px;
+    background-color: var(--bcolor-gray4);
+
+    img 
+    {
+        width: 23px;
+        height: 23px;
+    }
+    
+    p 
+    {
+        font-size: 0.9em;
+    }
+}

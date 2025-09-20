@@ -10,13 +10,13 @@ const Header = () => {
                     <h1>Léo Lagrange</h1>
                 </div>
                 <nav>
-                    <Link name="Tableau de bord" to="/dashboard" />
-                    <Link name="Statistiques" to="/statistics" />
-                    <Link name="Utilisateurs" to="/users" />
-                    <Link name="Paramètres" to="/settings" />
+                    <Link name="Tableau de bord" to="/dashboard" icon="dashboard" />
+                    <Link name="Statistiques" to="/statistics" icon="chart" />
+                    <Link name="Utilisateurs" to="/users" icon="user" />
+                    <Link name="Paramètres" to="/settings" icon="settings" />
                 </nav>
             </div>
-            <Link name="Déconnexion" />
+            <Link name="Déconnexion" icon="logout" />
         </div>
     );
 };
