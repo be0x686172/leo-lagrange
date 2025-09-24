@@ -40,10 +40,9 @@
             gap: 30px;
         }
 
-        .c-InputText
+        .c-InputText, .c-Select, .d-InputCheckbox
         {
             display: flex;
-            justify-content: center;
             align-items: center;
             width: 100%;
 
@@ -57,6 +56,18 @@
             input 
             {
                 flex: 2;
+                padding: 5px 0px 5px 5px;
+            }
+
+            select 
+            {
+                flex: 2;
+                padding: 5px 0px 5px 5px;
+            }
+
+            .i-candidates, .i-interviews
+            {
+                flex: 0.15;
             }
         }
 

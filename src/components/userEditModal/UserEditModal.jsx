@@ -1,5 +1,6 @@
 import './style.scss';
 import InputText from '../inputText/InputText';
+import Select from '../select/Select';
 
 const UserEditModal = ({id, open, onClose }) => {
     if (!open) return null
@@ -14,15 +15,12 @@ const UserEditModal = ({id, open, onClose }) => {
                 </div>
                 <InputText label="E-mail" name="email" />
                 <InputText label="Mot de passe" name="password" />
-                <div className='component c-Input'>
-                    <label>Rôle</label>
-                    <input className='i-role' type="text" />
-                </div>
-                <div>
+                <Select label="Rôle" name="role" choices={['Choisir un rôle', 'Assistant RH', 'Coordinateur', 'Administrateur', 'Aucun']} />
+                <div className='d-InputCheckbox'>
                     <label>Accès Candidats</label>
                     <input className='i-candidates' type="checkbox" />
                 </div>
-                <div>
+                <div className='d-InputCheckbox'>
                     <label>Accès Entretiens</label>
                     <input className='i-interviews' type="checkbox" />
                 </div>
