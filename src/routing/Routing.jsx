@@ -16,6 +16,7 @@ const Routing = () => {
                 <Route path="/users" element={<Users />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/logout" element={<Logout />} />
+                <Route path="/" element={<Login />} />
             </Routes>
         </BrowserRouter>
     );
