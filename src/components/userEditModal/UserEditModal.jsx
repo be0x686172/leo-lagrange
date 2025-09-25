@@ -2,7 +2,7 @@ import './style.scss';
 import InputText from '../inputText/InputText';
 import Select from '../select/Select';
 import { useEffect, useState } from 'react';
-import { getUserById, updateUser } from '../../services/userService';
+import { getUserById, updateUser } from '../../services/profilesService';
 
 const UserEditModal = ({id, open, onClose }) => {
 
@@ -25,7 +25,7 @@ const UserEditModal = ({id, open, onClose }) => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setUser((prev) => ({ ...prev, [name]: value }));
+        setUser((data) => ({ ...data, [name]: value }));
     };
 
     if (!open) return null
@@ -40,7 +40,7 @@ const UserEditModal = ({id, open, onClose }) => {
                 </div>
                 <InputText label="E-mail" name="email" value={user?.email || ''} onChange={handleChange} />
                 <InputText label="Mot de passe" name="password" />
-                <Select label="Rôle" name="role" choices={['Choisir un rôle', 'Assistant RH', 'Coordinateur', 'Administrateur', 'Aucun']} />
+                <Select label="Rôle" name="role" choices={['Choisir un rôle', 'Assistant RH', 'Assistante RH', 'Coordinateur', 'Coordinatrice', 'Administrateur', 'Administratrice', 'Aucun']} value={user?.role || ''} onChange={handleChange} />
                 <div className='d-InputCheckbox'>
                     <label>Accès Candidats</label>
                     <input className='i-candidates' type="checkbox" />

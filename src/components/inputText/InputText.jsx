@@ -4,7 +4,7 @@ const InputText = ({label, name, value, onChange}) => {
     return (
         <div className='component c-InputText'>
             <label>{label}</label>
-            <input className={'i-'+name} type="text" value={value} onChange={onChange} />
+            <input className={'i-'+name} name={name} type="text" value={value} onChange={onChange} />
         </div>
     );
 };
