@@ -2,11 +2,11 @@ import './style.scss';
 import InputText from '../inputText/InputText';
 import Select from '../select/Select';
 import { useEffect, useState } from 'react';
-import { getUserById, updateUser } from '../../services/profilesService';
+import { getProfileById, updateProfile } from '../../services/profilesService';
 
 const UserEditModal = ({id, open, onClose }) => {
 
-    const [user, setUser] = useState({
+    const [profile, setProfile] = useState({
         name: '',
         firstname: '',
         email: '',
@@ -17,15 +17,15 @@ const UserEditModal = ({id, open, onClose }) => {
 
     useEffect(() => {
         if (id) {
-            getUserById(id)
-            .then((data) => setUser(data))
+            getProfileById(id)
+            .then((data) => setProfile(data))
             .catch(console.error);
         }
     }, [id]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setUser((data) => ({ ...data, [name]: value }));
+        setProfile((data) => ({ ...data, [name]: value }));
     };
 
     if (!open) return null
@@ -35,19 +35,41 @@ const UserEditModal = ({id, open, onClose }) => {
             <h2>Modifier un utilisateur</h2>
             <form>
                 <div className='d-nf'>
-                    <InputText label="Nom" name="name" value={user?.name || ''} onChange={handleChange} />
-                    <InputText label="Prénom" name="firstname" value={user?.firstname || ''} onChange={handleChange} />
+                    <InputText label="Nom" name="name" value={profile?.name || ''} onChange={handleChange} />
+                    <InputText label="Prénom" name="firstname" value={profile?.firstname || ''} onChange={handleChange} />
                 </div>
-                <InputText label="E-mail" name="email" value={user?.email || ''} onChange={handleChange} />
+                <InputText label="E-mail" name="email" value={profile?.email || ''} onChange={handleChange} />
                 <InputText label="Mot de passe" name="password" />
-                <Select label="Rôle" name="role" choices={['Choisir un rôle', 'Assistant RH', 'Assistante RH', 'Coordinateur', 'Coordinatrice', 'Administrateur', 'Administratrice', 'Aucun']} value={user?.role || ''} onChange={handleChange} />
+                <Select label="Rôle" name="role" choices={['Choisir un rôle', 'Assistant RH', 'Assistante RH', 'Coordinateur', 'Coordinatrice', 'Administrateur', 'Administratrice', 'Aucun']} value={profile?.role || ''} onChange={handleChange} />
                 <div className='d-InputCheckbox'>
                     <label>Accès Candidats</label>
-                    <input className='i-candidates' type="checkbox" />
+                    <input
+                        className='i-candidates'
+                        type="checkbox"
+                        name="candidates_access"
+                        checked={profile.candidates_access === "✅"}
+                        onChange={(e) =>
+                            setProfile((prev) => ({
+                                ...prev,
+                                candidates_access: e.target.checked ? "✅" : "❌",
+                            }))
+                        } 
+                    />
                 </div>
                 <div className='d-InputCheckbox'>
                     <label>Accès Entretiens</label>
-                    <input className='i-interviews' type="checkbox" />
+                    <input
+                        className='i-interviews'
+                        type="checkbox"
+                        name="interviews_access"
+                        checked={profile.interviews_access === "✅"}
+                        onChange={(e) =>
+                            setProfile((prev) => ({
+                                ...prev,
+                                interviews_access: e.target.checked ? "✅" : "❌",
+                            }))
+                        }
+                    />
                 </div>
                 <div className='d-submit'>
                     <button onClick={onClose}>Annuler</button>

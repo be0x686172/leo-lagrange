@@ -1,7 +1,7 @@
 import { supabase } from "./supabaseClient";
 
 // Récupérer un utilisateur par id
-export async function getUserById(id) {
+export async function getProfileById(id) {
     const { data, error } = await supabase
         .from('profiles')
         .select('*')
@@ -13,7 +13,7 @@ export async function getUserById(id) {
 }
 
 // Mettre à jour un utilisateur
-export async function updateUser(id, payload) {
+export async function updateProfile(id, payload) {
     const { data, error } = await supabase
         .from('profiles')
         .update(payload)
