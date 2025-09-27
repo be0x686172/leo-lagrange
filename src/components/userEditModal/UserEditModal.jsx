@@ -3,6 +3,7 @@ import InputText from '../inputText/InputText';
 import Select from '../select/Select';
 import { useEffect, useState } from 'react';
 import { getProfileById, updateProfile } from '../../services/profilesService';
+import { updateUserAdmin } from '../../services/userService';
 
 const UserEditModal = ({id, open, onClose }) => {
 
@@ -28,6 +29,17 @@ const UserEditModal = ({id, open, onClose }) => {
         setProfile((data) => ({ ...data, [name]: value }));
     };
 
+    function handleForm(id, profile)
+    {
+        updateProfile(id, profile);
+        updateUserAdmin({
+            userId: id,
+            email: profile.email,
+            password: document.querySelector('.i-password').value
+        });
+        onClose();
+    }
+
     if (!open) return null
     return (
         <div className='component c-UserEditModal'>
@@ -40,7 +52,7 @@ const UserEditModal = ({id, open, onClose }) => {
                 </div>
                 <InputText label="E-mail" name="email" value={profile?.email || ''} onChange={handleChange} />
                 <InputText label="Mot de passe" name="password" />
-                <Select label="Rôle" name="role" choices={['Choisir un rôle', 'Assistant RH', 'Assistante RH', 'Coordinateur', 'Coordinatrice', 'Administrateur', 'Administratrice', 'Aucun']} value={profile?.role || ''} onChange={handleChange} />
+                <Select label="Rôle" name="role" choices={['Choisir un rôle', 'Assistant(e) RH', 'Coordinateur/trice', 'Administrateur/trice', 'Aucun']} value={profile?.role || ''} onChange={handleChange} />
                 <div className='d-InputCheckbox'>
                     <label>Accès Candidats</label>
                     <input
@@ -73,7 +85,7 @@ const UserEditModal = ({id, open, onClose }) => {
                 </div>
                 <div className='d-submit'>
                     <button onClick={onClose}>Annuler</button>
-                    <button>Confirmer</button>
+                    <button onClick={() => handleForm(id, profile)}>Confirmer</button>
                 </div>
             </form>
         </div>
