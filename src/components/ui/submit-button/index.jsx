@@ -1,16 +1,17 @@
 import './style.scss';
 
-const index = ({text, className, textSize}) => {
+const SubmitButtonUI = ({type, text, className, textSize}) => {
     return (
         <button 
-            className={`submit-button ${className}`}
+            className={`submit-button-ui ${className}`}
             style={{
                 fontSize: textSize === 's' ? '14px' : '12px'
             }}
+            type={type}
         >
             {text}
         </button>
     );
 };
 
-export default index;
+export default SubmitButtonUI;

@@ -8,7 +8,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 700px;
+    width: clamp(290px, 90vw, 700px);
     background-color: #fff;
     border: 1px solid var(--neutral-border-color);
     border-radius: 8px;
@@ -36,5 +36,10 @@
             margin-top: 7px;
         }
 
+    }
+
+    & > p {
+        color: var(--text-color-warning);
+        font-size: var(--font-size-s);
     }
 }

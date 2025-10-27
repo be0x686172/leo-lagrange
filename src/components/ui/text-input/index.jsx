@@ -1,15 +1,17 @@
 import './style.scss';
 
-const index = ({label, name, type, placeholder}) => {
+const TextInputUI = ({label, name, type, placeholder, action}) => {
     return (
-        <div className='text-input'>
+        <div className='text-input-ui'>
             {label ? <label htmlFor={name}>{label}</label> : ''}
             <input 
-                type={type} 
+                type={type}
+                name={name}
                 placeholder={placeholder}
+                onChange={action ? e => action(prev => ({...prev, [name]: e.target.value})) : ''}
             />
         </div>
     );
 };
 
-export default index;
+export default TextInputUI;
