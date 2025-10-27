@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root 
+{
+    // Colors
+        // Neutral
+        --neutral-text-color: #0A0A0A;
+        --neutral-border-color: #D4D4D4;
+        --neutral-background-color: #FAFAFA;
+
+        // Input
+        --input-background-color: #FAFAFA;
+        --input-border-color: #D4D4D4;
+        --input-placeholder-color: #737373;
+
+        // Buttons
+            // Primary
+        --primary-button-default-text-color: #FAFAFA;
+        --primary-button-default-background-color: #FF2627;
+        --primary-button-hover-text-color: #FAFAFA;
+        --primary-button-hover-background-color: #B91C1C;
+        --primary-button-disable-text-color: #FAFAFA;
+        --primary-button-disable-background-color: #FFA2A2;
+            // Secondary
+        --sedondary-button-default-text-color: #FF2627;
+        --secondary-button-default-background-color: #FAFAFA;
+        --secondary-button-default-border-color: #FFDFDF;
+        --secondary-button-hover-text-color: #4B0404;
+        --secondary-button-hover-background-color: #FF9D9D;
+        --secondary-button-hover-border-color: #FFA2A2;
+        --secondary-button-disable-text-color: #FF9D9D;
+        --secondary-button-disable-background-color: #FFF1F1;
+        --secondary-button-disable-border-color: #FFF1F1;
+            // Tertiary
+        --tertiary-button-default-text-color: #0A0A0A;
+        --tertiary-button-default-background-color: #FAFAFA;
+        --tertiary-button-default-border-color: #D4D4D4;
+        --tertiary-button-hover-text-color: #0A0A0A;
+        --tertiary-button-hover-background-color: #F5F5F5;
+        --tertiary-button-hover-border-color: #D4D4D4;
+        --tertiary-button-disable-text-color: #D4D4D4;
+        --tertiary-button-disable-background-color: #FAFAFA;
+        --tertiary-button-disable-border-color: #D4D4D4;
+    
+    // Font Size
+        // Heading
+        --font-size-h1: 30px;
+        --font-size-h2: 24px;
+        --font-size-h3: 20px;
+
+        // Text & Label
+        --font-size-2xl: 24px;
+        --font-size-xl: 20px;
+        --font-size-l: 18px;
+        --font-size-default: 16px;
+        --font-size-s: 14px;
+        --font-size-xs: 12px;
+        --font-size-2xs: 10px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: var(--default-color);
+    font-family: Inter;
+}
+
+body {
+    background-color: var(--neutral-background-color);
+}
+
+img {
+    object-fit: cover;
+    object-position: center;
+}
+
+h1 {
+    font-size: var(--font-size-h1);
+}
+
+h2 {
+    font-size: var(--font-size-h2);
+}
+
+h3 {
+    font-size: var(--font-size-h3);
+}

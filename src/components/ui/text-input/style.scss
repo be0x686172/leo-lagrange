@@ -1,0 +1,22 @@
+.text-input 
+{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    label {
+        font-size: var(--font-size-s);
+        font-weight: 500;
+    }
+
+    input {
+        &::placeholder {
+            color: var(--input-placeholder-color);
+        }
+        background-color: var(--input-background-color);
+        border: 1px solid var(--input-border-color);
+        border-radius: 5px;
+        outline: none;
+        padding: 7px 12px;
+    }
+}

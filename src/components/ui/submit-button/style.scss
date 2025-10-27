@@ -1,0 +1,19 @@
+.submit-button 
+{
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.primary-button-default
+{
+    background-color: var(--primary-button-default-background-color);
+    color: var(--primary-button-default-text-color);
+    border: none;
+    outline: none;
+
+    &:hover {
+        background-color: var(--primary-button-hover-background-color);
+        color: var(--primary-button-hover-text-color);
+    }
+}
