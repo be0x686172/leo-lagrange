@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client'
 import './global.scss';
-import LoginPage from './pages/login'
+import Routing from './routing/Routing';
 
 createRoot(document.getElementById('root')).render(
-    <LoginPage />
+    <Routing />
 )

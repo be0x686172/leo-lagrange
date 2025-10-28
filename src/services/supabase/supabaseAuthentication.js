@@ -13,3 +13,8 @@ export async function supabaseSignIn(credentials, setError) {
 
     return data;
 }
+
+// Retrieve a session
+export async function supabaseGetSession() {
+    const { data } = await supabase.auth.getSession(); return data;
+}

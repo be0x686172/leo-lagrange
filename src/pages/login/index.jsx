@@ -1,13 +1,23 @@
 import './style.scss';
 import TextInputUI from '../../components/ui/text-input';
 import SubmitButtonUI from '../../components/ui/submit-button';
-import { useState } from 'react';
-import { supabaseSignIn } from '../../services/supabase/supabaseAuthentication';
+import { useEffect, useState } from 'react';
+import { supabaseSignIn, supabaseGetSession } from '../../services/supabase/supabaseAuthentication';
+import { useNavigate } from 'react-router';
 
 const LoginPage = () => {
 
     const [{email, password}, setDataForm] = useState({ email: '', password: '' });
     const [error, setError] = useState('');
+    let navigate = useNavigate();
+
+    useEffect(() => {
+        supabaseGetSession()
+        .then((data) => {
+            if (data.session)
+                navigate('/dashboard');
+        });
+    }, []);
 
     const handleForm = async (event) => {
         event.preventDefault();
@@ -16,7 +26,7 @@ const LoginPage = () => {
 
         if (data && data.user) {
             setError("");
-            console.log('navigate to /dashboard');
+            navigate('/dashboard');
         }
     }
 
