@@ -70,12 +70,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: var(--default-color);
+    color: var(--common-neutral-text-color);
     font-family: Inter;
 }
 
 body {
-    background-color: var(--neutral-background-color);
+    background-color: var(--common-neutral-background-color);
+    color: var(--default-color);
 }
 
 img {
@@ -93,4 +94,8 @@ h2 {
 
 h3 {
     font-size: var(--font-size-h3);
+}
+
+a {
+    text-decoration: none;
 }

@@ -1,0 +1,10 @@
+.navigation-ui
+{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    p {
+        font-size: var(--font-size-s);
+    }
+}

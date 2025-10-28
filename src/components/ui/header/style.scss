@@ -1,8 +1,25 @@
 .header-ui 
 {
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: max-content;
     min-height: 100dvh;
     background-color: var(--common-neutral-background-color-white);
     border-right: 1px solid var(--common-neutral-border-color);
-    padding: 20px 10px;
+    padding: 30px 10px;
+
+    & > div {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+
+        nav 
+        {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 20px;
+        }
+    }
 }

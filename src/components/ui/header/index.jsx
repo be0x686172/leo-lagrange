@@ -8,9 +8,13 @@ const index = () => {
             <div>
                 <AvatarUI />
                 <nav>
-                    <NavigationUI />
+                    <NavigationUI url={"/dashboard"} name={"Dashboard"} icon={"LayoutDashboard"}/>
+                    <NavigationUI url={"/statistics"} name={"Statistiques"} icon={"ChartArea"}/>
+                    <NavigationUI url={"/users"} name={"Utilisateurs"} icon={"User"}/>
+                    <NavigationUI url={"/support"} name={"Support"} icon={"Headset"}/>
                 </nav>
             </div>
+            <NavigationUI url={"/logout"} name={"Déconnexion"} icon={"LogOut"}/>
         </div>
     );
 };

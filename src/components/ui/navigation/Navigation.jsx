@@ -1,11 +1,24 @@
 import './style.scss';
-import { LayoutDashboard } from 'lucide-react';
+import { LayoutDashboard, ChartArea, User, Headset, LogOut} from 'lucide-react';
+import { NavLink } from 'react-router';
 
 const Navigation = ({name, url, icon}) => {
+
+    const icons = {
+        LayoutDashboard: LayoutDashboard,
+        ChartArea: ChartArea,
+        User: User,
+        Headset: Headset,
+        LogOut: LogOut
+    };
+
+    const IconComponent = icons[icon];
+
     return (
-        <div className='navigation-ui'>
-            
-        </div>
+        <NavLink className='navigation-ui' to={url}>
+            <IconComponent size={28}/>
+            <p>{name}</p>
+        </NavLink>
     );
 };
 
