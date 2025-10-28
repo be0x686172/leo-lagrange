@@ -1,15 +1,26 @@
 import { BrowserRouter, Routes, Route } from "react-router";
+import Layout from "../layout";
 import LoginPage from "../pages/login";
 import DashboardPage from "../pages/dashboard";
+import StatisticsPage from '../pages/statistics';
+import UsersPage from '../pages/users';
+import SupportPage from '../pages/support';
+import LogoutPage from '../pages/logout';
 
 const Routing = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="*" element={<DashboardPage />} />
-                <Route path="/" element={<DashboardPage />} />
-                <Route path="/dashboard" element={<DashboardPage />} />
+                <Route element={<Layout />}>
+                    <Route path="*" element={<DashboardPage />} />
+                    <Route index path="/" element={<DashboardPage />} />
+                    <Route path="/dashboard" element={<DashboardPage />} />
+                    <Route path="/statistics" element={<StatisticsPage />} />
+                    <Route path="/users" element={<UsersPage />} />
+                    <Route path="/support" element={<SupportPage />} />
+                </Route>
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/logout" element={<LogoutPage />} />
             </Routes>
         </BrowserRouter>
     );

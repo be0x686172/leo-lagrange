@@ -2,7 +2,7 @@ import './style.scss';
 import { LayoutDashboard, ChartArea, User, Headset, LogOut} from 'lucide-react';
 import { NavLink } from 'react-router';
 
-const Navigation = ({name, url, icon}) => {
+const NavigationUI = ({name, url, icon, openHeader}) => {
 
     const icons = {
         LayoutDashboard: LayoutDashboard,
@@ -16,10 +16,10 @@ const Navigation = ({name, url, icon}) => {
 
     return (
         <NavLink className='navigation-ui' to={url}>
-            <IconComponent size={28}/>
-            <p>{name}</p>
+            <IconComponent size={30}/>
+            {openHeader ? <p>{name}</p> : ''}
         </NavLink>
     );
 };
 
-export default Navigation;
+export default NavigationUI;
