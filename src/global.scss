@@ -3,11 +3,16 @@
 :root 
 {
     // Colors
-        // Neutral
-        --neutral-text-color: #0A0A0A;
-        --neutral-border-color: #D4D4D4;
-        --neutral-background-color: #FAFAFA;
 
+        // Common
+            // Neutral
+            --common-neutral-text-color: #0A0A0A;
+            --common-neutral-border-color: #D4D4D4;
+            --common-neutral-background-color: #FAFAFA;
+            --common-neutral-background-color-white: #fff;
+        
+            // Primary
+        
         // Text
         --text-color-warning: #FF2627;
 
@@ -18,32 +23,32 @@
 
         // Buttons
             // Primary
-        --primary-button-default-text-color: #FAFAFA;
-        --primary-button-default-background-color: #FF2627;
-        --primary-button-hover-text-color: #FAFAFA;
-        --primary-button-hover-background-color: #B91C1C;
-        --primary-button-disable-text-color: #FAFAFA;
-        --primary-button-disable-background-color: #FFA2A2;
+            --primary-button-default-text-color: #FAFAFA;
+            --primary-button-default-background-color: #FF2627;
+            --primary-button-hover-text-color: #FAFAFA;
+            --primary-button-hover-background-color: #B91C1C;
+            --primary-button-disable-text-color: #FAFAFA;
+            --primary-button-disable-background-color: #FFA2A2;
             // Secondary
-        --sedondary-button-default-text-color: #FF2627;
-        --secondary-button-default-background-color: #FAFAFA;
-        --secondary-button-default-border-color: #FFDFDF;
-        --secondary-button-hover-text-color: #4B0404;
-        --secondary-button-hover-background-color: #FF9D9D;
-        --secondary-button-hover-border-color: #FFA2A2;
-        --secondary-button-disable-text-color: #FF9D9D;
-        --secondary-button-disable-background-color: #FFF1F1;
-        --secondary-button-disable-border-color: #FFF1F1;
+            --sedondary-button-default-text-color: #FF2627;
+            --secondary-button-default-background-color: #FAFAFA;
+            --secondary-button-default-border-color: #FFDFDF;
+            --secondary-button-hover-text-color: #4B0404;
+            --secondary-button-hover-background-color: #FF9D9D;
+            --secondary-button-hover-border-color: #FFA2A2;
+            --secondary-button-disable-text-color: #FF9D9D;
+            --secondary-button-disable-background-color: #FFF1F1;
+            --secondary-button-disable-border-color: #FFF1F1;
             // Tertiary
-        --tertiary-button-default-text-color: #0A0A0A;
-        --tertiary-button-default-background-color: #FAFAFA;
-        --tertiary-button-default-border-color: #D4D4D4;
-        --tertiary-button-hover-text-color: #0A0A0A;
-        --tertiary-button-hover-background-color: #F5F5F5;
-        --tertiary-button-hover-border-color: #D4D4D4;
-        --tertiary-button-disable-text-color: #D4D4D4;
-        --tertiary-button-disable-background-color: #FAFAFA;
-        --tertiary-button-disable-border-color: #D4D4D4;
+            --tertiary-button-default-text-color: #0A0A0A;
+            --tertiary-button-default-background-color: #FAFAFA;
+            --tertiary-button-default-border-color: #D4D4D4;
+            --tertiary-button-hover-text-color: #0A0A0A;
+            --tertiary-button-hover-background-color: #F5F5F5;
+            --tertiary-button-hover-border-color: #D4D4D4;
+            --tertiary-button-disable-text-color: #D4D4D4;
+            --tertiary-button-disable-background-color: #FAFAFA;
+            --tertiary-button-disable-border-color: #D4D4D4;
     
     // Font Size
         // Heading

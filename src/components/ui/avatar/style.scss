@@ -1,0 +1,30 @@
+.avatar-ui 
+{
+    display: flex;
+    gap: 10px;
+    
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid var(--common-neutral-border-color);
+        border-radius: 50%;
+        padding: 7px 5px;
+
+        p {
+            text-transform: uppercase;
+            font-weight: 450;
+        }
+    }
+
+    & > p {
+        font-size: var(--font-size-s);
+        font-weight: 450;
+
+        span {
+            &:last-of-type {
+                text-transform: uppercase;
+            }
+        }
+    }
+}
