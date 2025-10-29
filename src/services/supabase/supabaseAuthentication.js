@@ -18,3 +18,8 @@ export async function supabaseSignIn(credentials, setError) {
 export async function supabaseGetSession() {
     const { data } = await supabase.auth.getSession(); return data;
 }
+
+// Signing out
+export async function supabaseSignOut() {
+    const { error } = await supabase.auth.signOut()
+}

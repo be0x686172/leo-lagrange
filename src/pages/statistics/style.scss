@@ -1,0 +1,12 @@
+.statistics-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+
+    p {
+        font-weight: 500;
+        font-size: var(--font-size-l);
+    }
+}
