@@ -11,7 +11,7 @@ const ButtonUI = ({ icon, text, className, action }) => {
     const IconComponent = icons[icon];
 
     return (
-        <button className={`button-with-icon ${className}`} onClick={action ? action : () => {}}>
+        <button className={`button-ui ${className}`} onClick={action ? action : () => {}}>
             {icon ? <IconComponent size={13} /> : ''}
             <p>{text}</p>
         </button>
