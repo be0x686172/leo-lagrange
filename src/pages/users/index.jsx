@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import TableContainerFeature from '../../components/features/table-container/container';
 import usersData from './data.json';
 import { Pen } from 'lucide-react';
+import BadgeUI from '../../components/ui/badge';
 
 const UsersPage = () => {
 
@@ -21,8 +22,8 @@ const UsersPage = () => {
 
         const transformedData = usersData.map(user => ({
             ...user,
-            candidates_access: user.candidates_access ? 'oui' : 'non',
-            interviews_access: user.interviews_access ? 'oui' : 'non',
+            candidates_access: user.candidates_access ? <BadgeUI text={"OUI"} className={"badge-secondary"} /> : <BadgeUI text={"NON"} className={"badge-primary"} />,
+            interviews_access: user.interviews_access ? <BadgeUI text={"OUI"} className={"badge-secondary"} /> : <BadgeUI text={"NON"} className={"badge-primary"} />,
             action: <Pen size={17} style={{cursor: "pointer", display: "block"}} onClick={() => console.log('ok')} />  // On "transforme" la clé en JSX
         }));
 
