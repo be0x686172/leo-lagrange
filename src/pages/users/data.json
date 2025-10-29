@@ -1,25 +1,25 @@
 [
     {
+        "email": "abderahmane.beharrahala@gmail.com",
         "name": "Behar",
         "firstname": "Abderahmane",
-        "email": "abderahmane.beharrahala@gmail.com",
         "role": "Assistant RH",
         "candidates_access": true,
         "interviews_access": false
     },
     {
+        "email": "battlefield@gmail.com",
         "name": "Touril",
         "firstname": "Imbrahim",
-        "email": "battlefield@gmail.com",
         "role": "Coordinateur",
         "candidates_access": true,
         "interviews_access": true
 
     },
     {
+        "email": "switch@mariokart.com",
         "name": "El Halimi",
         "firstname": "Youssef",
-        "email": "switch@mariokart.com",
         "role": "Administrateur",
         "candidates_access": true,
         "interviews_access": true

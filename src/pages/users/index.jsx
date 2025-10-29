@@ -33,7 +33,7 @@ const UsersPage = () => {
 
     return (
         <div className='page users-page'>
-            <TableContainerFeature version={"users"}   columns={["Nom", "Prénom", "E-mail", "Statut", "Accès candidats", "Accès entretiens", "Action"]} data={users} lengthData={Object.keys(usersData).length} />
+            <TableContainerFeature version={"users"}   columns={["E-mail", "Nom", "Prénom", "Statut", "Accès candidats", "Accès entretiens", "Action"]} data={users} lengthData={Object.keys(usersData).length} />
         </div>
     );
 };
