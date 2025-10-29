@@ -33,12 +33,13 @@
 
     tfoot {
         border-top: 1px solid var(--common-neutral-border-color);
-        
+
         tr {
             th {
                 padding: 15px 0px;
                 font-size: var(--font-size-s);
                 font-weight: 500;
+                text-align: right;
             }
         }
     }

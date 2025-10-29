@@ -16,6 +16,15 @@
     }
 }
 
+.badge-primary-false {
+    display: inline-block;
+    background-color: var(--badge-primary-background-color);
+
+    p {
+        color: var(--badge-primary-text-color);
+    }
+}
+
 .badge-secondary {
     display: inline-block;
     background-color: var(--badge-secondary-background-color);
