@@ -2,4 +2,10 @@
     border-top: 1px solid var(--common-neutral-border-color);
     border-bottom: 1px solid var(--common-neutral-border-color);
     padding: 9px 11px;
+    display: flex;
+    gap: 10px;
+
+    & > :nth-child(1) {
+        flex: 1;
+    }
 }

@@ -1,0 +1,27 @@
+.button-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-radius: 6px;
+    padding: 0px 10px;
+    cursor: pointer;
+
+    svg {
+        stroke-width: 3px;
+    }
+
+    p {
+        font-size: var(--font-size-xs);
+        font-weight: 550;
+    }
+}
+
+.button-with-icon-1 {
+    border: 1px solid var(--common-neutral-border-color);
+    background-color: var(--common-color-background-color);
+
+    &:hover {
+        background-color: var(--common-neutral-hover-background-color);
+    }
+}
+
