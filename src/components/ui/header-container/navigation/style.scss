@@ -13,3 +13,15 @@
         background-color: var(--common-neutral-hover-background-color);
     }
 }
+
+.nav-active {
+    background-color: var(--common-neutral-active-background-color);
+    
+    svg {
+        stroke: var(--common-primary-medium-color);
+    }
+
+    p {
+        color: var(--common-primary-medium-color);
+    }
+}

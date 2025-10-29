@@ -15,8 +15,13 @@ const NavigationUI = ({name, url, icon, openHeader}) => {
     const IconComponent = icons[icon];
 
     return (
-        <NavLink className='navigation-ui' to={url}>
-            <IconComponent size={30}/>
+        <NavLink 
+            to={url}
+            className={({ isActive }) =>
+                isActive ? "navigation-ui nav-active" : "navigation-ui"
+            }
+        >
+            <IconComponent size={30} />
             {openHeader ? <p>{name}</p> : ''}
         </NavLink>
     );
