@@ -12,8 +12,8 @@ const TableTableContainerFeature = ({ version, columns, data, lengthData }) => {
             </thead>
             <tbody>
                 {data.map((row, i) => (
-                    <tr key={i}>
-                        {Object.values(row).map((cell, j) => (
+                    <tr key={row.id}>
+                        {Object.entries(row).filter(([key]) => key !== "id").map(([key, cell], j) => (
                             <td key={j}>{cell}</td>
                         ))}
                     </tr>

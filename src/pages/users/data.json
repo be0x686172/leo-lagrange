@@ -1,5 +1,6 @@
 [
     {
+        "id": "1",
         "email": "abderahmane.beharrahala@gmail.com",
         "name": "Behar",
         "firstname": "Abderahmane",
@@ -8,6 +9,7 @@
         "interviews_access": false
     },
     {
+        "id": "2",
         "email": "battlefield@gmail.com",
         "name": "Touril",
         "firstname": "Imbrahim",
@@ -17,6 +19,7 @@
 
     },
     {
+        "id": "3",
         "email": "switch@mariokart.com",
         "name": "El Halimi",
         "firstname": "Youssef",
