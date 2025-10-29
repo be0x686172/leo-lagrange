@@ -18,7 +18,7 @@ const UsersPage = () => {
 
     return (
         <div className='page users-page'>
-            <TableContainerFeature />
+            <TableContainerFeature version={"users"} />
         </div>
     );
 };

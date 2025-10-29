@@ -1,10 +1,18 @@
 import './style.scss';
 import  HeaderTableContainerFeature from '../header';
+import TableTableContainerFeature from '../table';
+import ViewInformationsCandidatesTableContainerFeature from '../view-informations-candidates';
 
 const TableContainerFeature = ({ version }) => {
     return (
         <div className='table-container-feature'>
-            <TableContainerFeature />
+            <HeaderTableContainerFeature />
+            {version === 'users' ? <TableTableContainerFeature /> : (
+                <div>
+                    <TableTableContainerFeature />
+                    <ViewInformationsCandidatesTableContainerFeature />
+                </div>
+            )}
         </div>
     );
 };
