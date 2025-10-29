@@ -26,7 +26,7 @@ const UsersPage = () => {
             role: <BadgeUI text={user.role} className={"badge-default"} />,
             candidates_access: user.candidates_access ? <BadgeUI text={"OUI"} className={"badge-secondary"} /> : <BadgeUI text={"NON"} className={"badge-primary-false"} />,
             interviews_access: user.interviews_access ? <BadgeUI text={"OUI"} className={"badge-secondary"} /> : <BadgeUI text={"NON"} className={"badge-primary-false"} />,
-            action: <Pen size={17} style={{cursor: "pointer", display: "block"}} onClick={() => console.log('ok')} />  // On "transforme" la clé en JSX
+            action: <Pen size={17} style={{cursor: "pointer", display: "block"}} onClick={() => console.log(user.id)} />  // On "transforme" la clé en JSX
         }));
 
         setUsers(transformedData);
