@@ -33,10 +33,10 @@ const LoginPage = () => {
     return (
         <div className='login-page'>
             <h1>Léo Lagrange Recrutement</h1>
-            <form onSubmit={(event) => handleForm(event)}>
+            <form>
                 <TextInputUI label={"Adresse électronique"} name={"email"} type={"email"} placeholder={"Entrez votre adresse électronique"} action={setDataForm} />
                 <TextInputUI label={"Mot de passe"} name={"password"} type={"password"} placeholder={"Entrez votre mot de passe"} action={setDataForm} />
-                <ButtonWithIconUI text={"Se connecter"} className={"button-primary"} />
+                <ButtonWithIconUI text={"Se connecter"} className={"button-primary"} action={(event => handleForm(event))} />
             </form>
             {error ? <p>{error}</p> : ''}
         </div>

@@ -1,7 +1,7 @@
 import './style.scss';
 import { ListFilter, CirclePlus } from 'lucide-react';
 
-const ButtonWithIconUI = ({ icon, text, className }) => {
+const ButtonWithIconUI = ({ icon, text, className, action }) => {
 
     const icons = {
         ListFilter: ListFilter,
@@ -11,10 +11,10 @@ const ButtonWithIconUI = ({ icon, text, className }) => {
     const IconComponent = icons[icon];
 
     return (
-        <div className={`button-with-icon ${className}`}>
+        <button className={`button-with-icon ${className}`} onClick={action ? action : () => {}}>
             {icon ? <IconComponent size={13} /> : ''}
             <p>{text}</p>
-        </div>
+        </button>
     );
 };
 
