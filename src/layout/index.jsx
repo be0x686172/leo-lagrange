@@ -1,4 +1,4 @@
-import HeaderUI from "../components/ui/header-container/header";
+import HeaderUI from "../components/ui/header-container/container";
 import { Outlet } from "react-router";
 import './style.scss';
 

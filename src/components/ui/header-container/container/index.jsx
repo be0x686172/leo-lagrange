@@ -16,7 +16,7 @@ const HeaderUI = () => {
     };
     
     return (
-        <div className='header-ui' onClick={(e) => handleClick(e)}>
+        <div className='header-container-ui' onClick={(e) => handleClick(e)}>
             <div>
                 <AvatarUI openHeader={openHeader} />
                 <nav>

@@ -2,6 +2,7 @@ import './style.scss';
 import { useNavigate } from 'react-router';
 import { supabaseGetSession } from '../../services/supabase/supabaseAuthentication';
 import { useEffect } from 'react';
+import TableContainerFeature from '../../components/features/table-container/container';
 
 const UsersPage = () => {
 
@@ -17,7 +18,7 @@ const UsersPage = () => {
 
     return (
         <div className='page users-page'>
-            Users
+            <TableContainerFeature />
         </div>
     );
 };
