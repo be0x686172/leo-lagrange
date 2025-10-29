@@ -1,9 +1,9 @@
 import './style.scss';
 import TextInputUI from '../../components/ui/text-input';
-import SubmitButtonUI from '../../components/ui/submit-button';
 import { useEffect, useState } from 'react';
 import { supabaseSignIn, supabaseGetSession } from '../../services/supabase/supabaseAuthentication';
 import { useNavigate } from 'react-router';
+import ButtonWithIconUI from '../../components/ui/button-with-icon/index';
 
 const LoginPage = () => {
 
@@ -36,7 +36,7 @@ const LoginPage = () => {
             <form onSubmit={(event) => handleForm(event)}>
                 <TextInputUI label={"Adresse électronique"} name={"email"} type={"email"} placeholder={"Entrez votre adresse électronique"} action={setDataForm} />
                 <TextInputUI label={"Mot de passe"} name={"password"} type={"password"} placeholder={"Entrez votre mot de passe"} action={setDataForm} />
-                <SubmitButtonUI type="submit" text={"Se connecter"} className={"submit-button-1"} textSize={'s'} />
+                <ButtonWithIconUI text={"Se connecter"} className={"button-primary"} />
             </form>
             {error ? <p>{error}</p> : ''}
         </div>

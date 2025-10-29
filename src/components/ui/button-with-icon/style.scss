@@ -1,27 +1,77 @@
 .button-with-icon {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 5px;
     border-radius: 6px;
     padding: 0px 10px;
     cursor: pointer;
+}
+
+.button-primary
+{
+    background-color: var(--primary-button-default-background-color);
+    border: none;
+    outline: none;
+    padding: 8px;
+    border-radius: 5px;
+
+    p {
+        color: var(--primary-button-default-text-color);
+        font-size: var(--font-size-s);
+        font-weight: 400;
+    }
+
+    &:hover {
+        background-color: var(--primary-button-hover-background-color);
+        color: var(--primary-button-hover-text-color);
+    }
+}
+
+.button-secondary {
+
+    background-color: var(--secondary-button-default-background-color);
+    border: 1px solid var(--secondary-button-default-border-color);
+
+    svg {
+        stroke-width: 2px;
+        stroke: var(--sedondary-button-default-text-color);
+    }
+
+    p {
+        color: var(--sedondary-button-default-text-color);
+        font-size: var(--font-size-s);
+        font-weight: 500;
+    }
+
+    &:hover {
+        background-color: var(--secondary-button-hover-background-color);
+        border: 1px solid var(--secondary-button-hover-border-color);
+
+        svg {
+            stroke: var(--secondary-button-hover-text-color);
+        }
+
+        p {
+            color: var(--secondary-button-hover-text-color);
+        }
+    }
+}
+
+.button-tertiary {
+    border: 1px solid var(--common-neutral-border-color);
+    background-color: var(--common-color-background-color);
 
     svg {
         stroke-width: 3px;
     }
 
     p {
-        font-size: var(--font-size-xs);
-        font-weight: 550;
+        font-size: var(--font-size-s);
+        font-weight: 500;
     }
-}
-
-.button-with-icon-1 {
-    border: 1px solid var(--common-neutral-border-color);
-    background-color: var(--common-color-background-color);
 
     &:hover {
         background-color: var(--common-neutral-hover-background-color);
     }
 }
-

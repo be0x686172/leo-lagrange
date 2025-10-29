@@ -1,10 +1,11 @@
 import './style.scss';
-import { ListFilter } from 'lucide-react';
+import { ListFilter, CirclePlus } from 'lucide-react';
 
 const ButtonWithIconUI = ({ icon, text, className }) => {
 
     const icons = {
-        ListFilter: ListFilter
+        ListFilter: ListFilter,
+        CirclePlus: CirclePlus
     };
 
     const IconComponent = icons[icon];
