@@ -4,7 +4,7 @@ import { supabaseGetSession } from '../../services/supabase/supabaseAuthenticati
 import { useEffect, useState } from 'react';
 import TableContainerFeature from '../../components/features/table-container/container';
 import usersData from './data.json';
-import { Ellipsis } from 'lucide-react';
+import { Pen } from 'lucide-react';
 
 const UsersPage = () => {
 
@@ -21,7 +21,9 @@ const UsersPage = () => {
 
         const transformedData = usersData.map(user => ({
             ...user,
-            action: <Ellipsis style={{cursor: "pointer"}} onClick={() => console.log('ok')} />  // On "transforme" la clé en JSX
+            candidates_access: user.candidates_access ? 'oui' : 'non',
+            interviews_access: user.interviews_access ? 'oui' : 'non',
+            action: <Pen size={17} style={{cursor: "pointer", display: "block"}} onClick={() => console.log('ok')} />  // On "transforme" la clé en JSX
         }));
 
         setUsers(transformedData);
