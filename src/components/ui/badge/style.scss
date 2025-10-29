@@ -2,15 +2,36 @@
     p {
         font-size: var(--font-size-xs);
     }
-    padding: 2px 5px;
+    padding: 1.5px 6px;
     border-radius: 10px;
 }
 
 .badge-primary {
     display: inline-block;
     background-color: var(--badge-primary-background-color);
+    border: 1px solid var(--badge-primary-border-color);
 
     p {
         color: var(--badge-primary-text-color);
+    }
+}
+
+.badge-secondary {
+    display: inline-block;
+    background-color: var(--badge-secondary-background-color);
+    border: 1px solid var(--badge-secondary-border-color);
+
+    p {
+        color: var(--badge-secondary-text-color);
+    }
+}
+
+.badge-default {
+    display: inline-block;
+    background-color: var(--badge-default-background-color);
+    border: 1px solid var(--badge-default-border-color);
+
+    p {
+        color: var(--badge-default-text-color);
     }
 }
