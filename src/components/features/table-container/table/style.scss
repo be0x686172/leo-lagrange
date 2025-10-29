@@ -1,3 +1,44 @@
 .table-table-container-feature {
-    
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+        th {
+            color: #A6A6A6;
+            font-weight: 600;
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--common-neutral-border-color);
+        }
+    }
+
+    tbody {
+        width: 100%;
+
+        tr {
+            transition: background-color 0.15s ease-in-out;
+
+            &:hover {
+                background-color: #f9f9f9;
+            }
+
+            td {
+                padding: 15px;
+                text-align: left;
+                font-size: var(--font-size-s);
+            }
+        }
+    }
+
+    tfoot {
+        border-top: 1px solid var(--common-neutral-border-color);
+        
+        tr {
+            th {
+                padding: 15px 0px;
+                font-size: var(--font-size-s);
+                font-weight: 500;
+            }
+        }
+    }
 }

@@ -1,10 +1,30 @@
 import './style.scss';
 
-const TableTableContainerFeature = () => {
+const TableTableContainerFeature = ({ version, columns, data, lengthData }) => {
     return (
-        <div className='table-table-container-feature'>
-            Table in Table
-        </div>
+        <table className='table-table-container-feature'>
+            <thead>
+                <tr>
+                    {columns.map((column, i) => (
+                        <th key={i}>{column}</th>
+                    ))}
+                </tr>
+            </thead>
+            <tbody>
+                {data.map((row, i) => (
+                    <tr key={i}>
+                        {Object.values(row).map((cell, j) => (
+                            <td key={j}>{cell}</td>
+                        ))}
+                    </tr>
+                ))}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>{lengthData} {version == "users" ? "utilisateurs" : "candidats"}</th>
+                </tr>
+            </tfoot>
+        </table>
     );
 };
 

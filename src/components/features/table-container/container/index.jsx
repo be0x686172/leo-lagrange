@@ -3,13 +3,13 @@ import  HeaderTableContainerFeature from '../header';
 import TableTableContainerFeature from '../table';
 import ViewInformationsCandidatesTableContainerFeature from '../view-informations-candidates';
 
-const TableContainerFeature = ({ version }) => {
+const TableContainerFeature = ({ version, columns, data, lengthData }) => {
     return (
         <div className='table-container-feature'>
             <HeaderTableContainerFeature version={version} />
-            {version === 'users' ? <TableTableContainerFeature /> : (
+            {version === 'users' ? <TableTableContainerFeature columns={columns} data={data} version={version} lengthData={lengthData}/> : (
                 <div>
-                    <TableTableContainerFeature />
+                    <TableTableContainerFeature columns={columns} data={data} version={version} lengthData={lengthData}/>
                     <ViewInformationsCandidatesTableContainerFeature />
                 </div>
             )}
