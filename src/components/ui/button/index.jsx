@@ -1,7 +1,7 @@
 import './style.scss';
 import { ListFilter, CirclePlus } from 'lucide-react';
 
-const ButtonWithIconUI = ({ icon, text, className, action }) => {
+const ButtonUI = ({ icon, text, className, action }) => {
 
     const icons = {
         ListFilter: ListFilter,
@@ -18,4 +18,4 @@ const ButtonWithIconUI = ({ icon, text, className, action }) => {
     );
 };
 
-export default ButtonWithIconUI;
+export default ButtonUI;

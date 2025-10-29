@@ -3,7 +3,7 @@ import TextInputUI from '../../components/ui/text-input';
 import { useEffect, useState } from 'react';
 import { supabaseSignIn, supabaseGetSession } from '../../services/supabase/supabaseAuthentication';
 import { useNavigate } from 'react-router';
-import ButtonWithIconUI from '../../components/ui/button-with-icon/index';
+import ButtonUI from '../../components/ui/button/index';
 
 const LoginPage = () => {
 
@@ -36,7 +36,7 @@ const LoginPage = () => {
             <form>
                 <TextInputUI label={"Adresse électronique"} name={"email"} type={"email"} placeholder={"Entrez votre adresse électronique"} action={setDataForm} />
                 <TextInputUI label={"Mot de passe"} name={"password"} type={"password"} placeholder={"Entrez votre mot de passe"} action={setDataForm} />
-                <ButtonWithIconUI text={"Se connecter"} className={"button-primary"} action={(event => handleForm(event))} />
+                <ButtonUI text={"Se connecter"} className={"button-primary"} action={(event => handleForm(event))} />
             </form>
             {error ? <p>{error}</p> : ''}
         </div>
