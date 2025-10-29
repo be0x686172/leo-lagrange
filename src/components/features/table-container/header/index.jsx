@@ -1,9 +1,10 @@
 import './style.scss';
+import TextInputWithIcon from '../../../ui/text-input-with-icon';
 
-const HeaderTableContainerFeature = () => {
+const HeaderTableContainerFeature = ({ version }) => {
     return (
         <div className='header-table-container-feature'>
-            Header Table Container
+            <TextInputWithIcon placeholder={version === "users" ? "Rechercher un utilisateur" : "Rechercher un candidatat"} />
         </div>
     );
 };

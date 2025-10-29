@@ -1,0 +1,16 @@
+.text-input-with-icon {
+
+    padding: 4px 10px;
+    display: flex;
+    border-radius: 8px;
+    align-items: center;
+    background-color: var(--input-background-color);
+    border: 1px solid var(--common-neutral-border-color);
+    gap: 7px;
+    
+    input {
+        border: none;
+        outline: none;
+        background-color: transparent;
+    }
+}

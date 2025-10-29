@@ -6,7 +6,7 @@ import ViewInformationsCandidatesTableContainerFeature from '../view-information
 const TableContainerFeature = ({ version }) => {
     return (
         <div className='table-container-feature'>
-            <HeaderTableContainerFeature />
+            <HeaderTableContainerFeature version={version} />
             {version === 'users' ? <TableTableContainerFeature /> : (
                 <div>
                     <TableTableContainerFeature />
