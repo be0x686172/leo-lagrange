@@ -22,6 +22,7 @@ const UsersPage = () => {
 
         const transformedData = usersData.map(user => ({
             ...user,
+            name: user.name.toUpperCase(),
             role: <BadgeUI text={user.role} className={"badge-default"} />,
             candidates_access: user.candidates_access ? <BadgeUI text={"OUI"} className={"badge-secondary"} /> : <BadgeUI text={"NON"} className={"badge-primary-false"} />,
             interviews_access: user.interviews_access ? <BadgeUI text={"OUI"} className={"badge-secondary"} /> : <BadgeUI text={"NON"} className={"badge-primary-false"} />,
@@ -33,7 +34,7 @@ const UsersPage = () => {
 
     return (
         <div className='page users-page'>
-            <TableContainerFeature version={"users"}   columns={["E-mail", "Nom", "Prénom", "Statut", "Accès candidats", "Accès entretiens", "Action"]} data={users} lengthData={Object.keys(usersData).length} />
+            <TableContainerFeature version={"users"} columns={["E-mail", "Nom", "Prénom", "Statut", "Accès candidats", "Accès entretiens", "Action"]} data={users} lengthData={Object.keys(usersData).length} />
         </div>
     );
 };
