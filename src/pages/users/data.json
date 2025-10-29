@@ -5,8 +5,7 @@
         "email": "abderahmane.beharrahala@gmail.com",
         "role": "Assistant RH",
         "candidates_access": true,
-        "interviews_access": false,
-        "action": "test"
+        "interviews_access": false
     },
     {
         "name": "Touril",

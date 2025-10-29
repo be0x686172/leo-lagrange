@@ -4,17 +4,21 @@ import { supabaseGetSession } from '../../services/supabase/supabaseAuthenticati
 import { useEffect } from 'react';
 import TableContainerFeature from '../../components/features/table-container/container';
 import usersData from './data.json';
+import { Ellipsis } from 'lucide-react';
 
 const UsersPage = () => {
 
     let navigate = useNavigate();
     
     useEffect(() => {
+    
         supabaseGetSession()
         .then((data) => {
             if (!data.session)
                 navigate('/login');
         });
+
+        
     }, []);
 
     return (
