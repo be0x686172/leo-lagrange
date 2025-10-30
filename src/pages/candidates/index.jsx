@@ -1,13 +1,14 @@
-import { useOutletContext } from "react-router";
+import { useState } from 'react';
+import TableContainerFeature from '../../components/features/table-container/container';
+import candidatesData from './data.json';
 
 const CandidatesPage = () => {
 
-    const { candidates } = useOutletContext();
+    const [users, setUsers] = useState([]);
 
     return (
         <div className="page candidates-page">
-            Candidates Page
-            {candidates}
+            <TableContainerFeature version={"candidates"} columns={["Date de candidature", "Nom", "Prénom", "Poste"]} data={candidatesData} lengthData={Object.keys(candidatesData).length}/>
         </div>
     );
 };

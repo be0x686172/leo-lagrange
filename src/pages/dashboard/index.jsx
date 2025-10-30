@@ -3,6 +3,7 @@ import './style.scss';
 import { useNavigate } from 'react-router';
 import { supabaseGetSession } from '../../services/supabase/supabaseAuthentication';
 import { Outlet } from 'react-router';
+import { NavLink } from 'react-router';
 
 const DashboardPage = () => {
 
@@ -18,8 +19,21 @@ const DashboardPage = () => {
 
     return (
         <div className='page dashboard-page'>
-            <p>Dashboard</p>
-            <Outlet context={"test"}/>
+            <div>
+                <NavLink 
+                    to={"/dashboard/candidates"} 
+                    className={({ isActive }) =>
+                        isActive ? "a-active" : ""
+                    }
+                > Candidats</NavLink>
+                <NavLink 
+                    to={"/dashboard/interviews"}
+                    className={({ isActive }) =>
+                        isActive ? "a-active" : ""
+                    }
+                >Interviews</NavLink>
+            </div>
+            <Outlet />
         </div>
     );
 };
