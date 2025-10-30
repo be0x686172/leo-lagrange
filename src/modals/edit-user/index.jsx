@@ -8,7 +8,7 @@ import { useState } from 'react';
 const EditUserModal = ({setOpenEditUserModal}) => {
 
     const [candidatesAccess, setCandidatesAccess] = useState(false);
-    const [interviewsAccess, setInterviews] = useState(false);
+    const [interviewsAccess, setInterviewsAccess] = useState(false);
     
     return (
         <div className='edit-user-modal'>
@@ -25,7 +25,11 @@ const EditUserModal = ({setOpenEditUserModal}) => {
                     <SelectUI label={"Statut"} name={"role"} />
                     <div>
                         <label>Accès candidats</label>
-                        <SwitchUI />
+                        <SwitchUI id={"candidates_access"} isOn={candidatesAccess} handleToggle={() => setCandidatesAccess(!candidatesAccess)}/>
+                    </div>
+                    <div>
+                        <label>Accès entretiens</label>
+                        <SwitchUI id={"interviews_access"} isOn={interviewsAccess} handleToggle={() => setInterviewsAccess(!interviewsAccess)}/>
                     </div>
                 </form>
             </div>

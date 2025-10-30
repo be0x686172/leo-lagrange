@@ -1,17 +1,18 @@
 import './style.scss';
 
-const SwitchUI = ({}) => {
+const SwitchUI = ({id, isOn, handleToggle}) => {
     return (
         <>
             <input
+                onClick={handleToggle ? handleToggle : () => {}}
                 className="react-switch-checkbox"
-                id={`react-switch-new`}
+                id={id}
                 type="checkbox"
             />
             <label
-                style={{ background: '#06D6A0' }}
+                style={{ background: isOn ? '#06D6A0' : '#D4D4D4' }}
                 className="react-switch-label"
-                htmlFor={`react-switch-new`}
+                htmlFor={id}
             >
                 <span className={`react-switch-button`} />
             </label>
