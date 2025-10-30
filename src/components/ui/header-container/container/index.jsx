@@ -20,7 +20,7 @@ const HeaderUI = () => {
             <div>
                 <AvatarUI openHeader={openHeader} />
                 <nav>
-                    <NavigationUI url={"/dashboard"} name={"Dashboard"} icon={"LayoutDashboard"} openHeader={openHeader}/>
+                    <NavigationUI url={"/dashboard/candidates"} name={"Dashboard"} icon={"LayoutDashboard"} openHeader={openHeader}/>
                     <NavigationUI url={"/statistics"} name={"Statistiques"} icon={"ChartArea"} openHeader={openHeader} />
                     <NavigationUI url={"/users"} name={"Utilisateurs"} icon={"User"} openHeader={openHeader} />
                     <NavigationUI url={"/support"} name={"Support"} icon={"Headset"} openHeader={openHeader} />
