@@ -2,8 +2,14 @@ import './style.scss';
 import { X } from 'lucide-react';
 import TextInputUI from '../../components/ui/text-input';
 import SelectUI from '../../components/ui/select';
+import SwitchUI from '../../components/ui/switch';
+import { useState } from 'react';
 
 const EditUserModal = ({setOpenEditUserModal}) => {
+
+    const [candidatesAccess, setCandidatesAccess] = useState(false);
+    const [interviewsAccess, setInterviews] = useState(false);
+    
     return (
         <div className='edit-user-modal'>
             <div>
@@ -17,6 +23,10 @@ const EditUserModal = ({setOpenEditUserModal}) => {
                     <TextInputUI label="E-mail" name={"email"} type={"email"} />
                     <TextInputUI label="Mot de passe" name={"password"} type={"password"} />
                     <SelectUI label={"Statut"} name={"role"} />
+                    <div>
+                        <label>Accès candidats</label>
+                        <SwitchUI />
+                    </div>
                 </form>
             </div>
         </div>

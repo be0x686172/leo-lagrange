@@ -63,6 +63,19 @@
                     flex: 1;
                 }
             }
+
+            & > div:nth-of-type(5), & > div:nth-of-type(6)
+            {
+                margin-top: 10px;
+                display: flex;
+                align-items: center;
+                gap: 15px;
+
+                label {
+                    font-size: var(--font-size-s);
+                    font-weight: 500;
+                }
+            }
         }
     }
 }
