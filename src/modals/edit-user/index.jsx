@@ -1,19 +1,16 @@
 import './style.scss';
+import { useEffect, useState } from 'react';
 import { X } from 'lucide-react';
 import TextInputUI from '../../components/ui/text-input';
 import SelectUI from '../../components/ui/select';
 import SwitchUI from '../../components/ui/switch';
-import { useEffect, useState } from 'react';
 import ButtonUI from '../../components/ui/button';
-import { supabaseGetUserById } from '../../services/supabase/supabaseUsersDatabase';
-import { supabaseUpdateUser } from '../../services/supabase/supabaseUsersDatabase';
-import { supabaseDeleteUser } from '../../services/supabase/supabaseUsersAuth';
+import { supabaseGetUserById, supabaseUpdateUser } from '../../services/supabase/supabaseUsersDatabase';
+import { supabaseDeleteUserAuth, supabaseUpdateUserAuth } from '../../services/supabase/supabaseUsersAuth';
 
 const EditUserModal = ({userId, setOpenEditUserModal}) => {
     
     const [user, setUser] = useState(null);
-    const [candidatesAccess, setCandidatesAccess] = useState(false);
-    const [interviewsAccess, setInterviewsAccess] = useState(false);
 
     useEffect(() => {
         supabaseGetUserById(userId).then((data) => {
@@ -26,12 +23,13 @@ const EditUserModal = ({userId, setOpenEditUserModal}) => {
     function handleForm(event) {
         event.preventDefault();
         supabaseUpdateUser(user);
+        supabaseUpdateUserAuth(user);
         setOpenEditUserModal(false);
     }
 
     function deleteUser(event) {
         event.preventDefault();
-        supabaseDeleteUser(user.id);
+        supabaseDeleteUserAuth(user.id);
         setOpenEditUserModal(false);
     }
     
