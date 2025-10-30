@@ -1,7 +1,7 @@
 import './style.scss';
 import { Search } from 'lucide-react';
 
-const TextInputWithIcon = ({ placeholder }) => {
+const TextInputWithIconUI = ({ placeholder }) => {
     return (
         <div className='text-input-with-icon'>
             <Search size={18} color='#737373' />
@@ -10,4 +10,4 @@ const TextInputWithIcon = ({ placeholder }) => {
     );
 };
 
-export default TextInputWithIcon;
+export default TextInputWithIconUI;

@@ -10,11 +10,42 @@
         position: relative;
         width: 100%;
         height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 46px;
 
         .cross {
             position: fixed;
             right: 20px;
-            top: 10px;
+            top: 23px;
+            cursor: pointer;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            .text-input-ui {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+
+                label {
+                    width: 100px;
+                }
+
+                input {
+                    flex: 1;
+                }
+            }
+            & > div:first-of-type {
+                display: flex;
+                gap: 50px;
+            }
         }
     }
 }

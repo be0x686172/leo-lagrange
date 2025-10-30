@@ -8,7 +8,7 @@ const TextInputUI = ({label, name, type, placeholder, action}) => {
                 type={type}
                 name={name}
                 placeholder={placeholder}
-                onChange={action ? e => action(prev => ({...prev, [name]: e.target.value})) : ''}
+                onChange={action ? e => action(prev => ({...prev, [name]: e.target.value})) : () => {}}
             />
         </div>
     );
