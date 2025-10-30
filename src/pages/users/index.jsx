@@ -1,9 +1,8 @@
 import './style.scss';
-import { data, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import { supabaseGetSession } from '../../services/supabase/supabaseAuthentication';
 import { useEffect, useState } from 'react';
 import TableContainerFeature from '../../components/features/table-container/container';
-import usersData from './data.json';
 import { Pen } from 'lucide-react';
 import BadgeUI from '../../components/ui/badge';
 import { supabaseGetUsers } from '../../services/supabase/supabaseUsersDatabase';
@@ -40,7 +39,7 @@ const UsersPage = () => {
 
     return (
         <div className='page users-page'>
-            <TableContainerFeature version={"users"} columns={["E-mail", "Nom", "Prénom", "Statut", "Accès candidats", "Accès entretiens", "Action"]} data={users} lengthData={Object.keys(usersData).length} />
+            <TableContainerFeature version={"users"} columns={["E-mail", "Nom", "Prénom", "Statut", "Accès candidats", "Accès entretiens", "Action"]} data={users} lengthData={Object.keys(users).length} />
             {openEditUserModal ? <EditUserModal userId={userId} setOpenEditUserModal={setOpenEditUserModal} /> : ''}
         </div>
     );
