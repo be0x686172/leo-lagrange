@@ -34,8 +34,8 @@ const LoginPage = () => {
         <div className='login-page'>
             <h1>Léo Lagrange Recrutement</h1>
             <form>
-                <TextInputUI label={"Adresse électronique"} name={"email"} type={"email"} placeholder={"Entrez votre adresse électronique"} action={setDataForm} />
-                <TextInputUI label={"Mot de passe"} name={"password"} type={"password"} placeholder={"Entrez votre mot de passe"} action={setDataForm} />
+                <TextInputUI label={"Adresse électronique"} name={"email"} type={"email"} placeholder={"Entrez votre adresse électronique"} value={email} action={setDataForm} />
+                <TextInputUI label={"Mot de passe"} name={"password"} type={"password"} placeholder={"Entrez votre mot de passe"} value={password} action={setDataForm} />
                 <ButtonUI text={"Se connecter"} className={"button-primary"} action={(event => handleForm(event))} />
             </form>
             {error ? <p>{error}</p> : ''}

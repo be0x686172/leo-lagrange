@@ -6,7 +6,7 @@ import TableContainerFeature from '../../components/features/table-container/con
 import usersData from './data.json';
 import { Pen } from 'lucide-react';
 import BadgeUI from '../../components/ui/badge';
-import { supabaseGetUsers } from '../../services/supabase/supabaseDatabase';
+import { supabaseGetUsers } from '../../services/supabase/supabaseUsersDatabase';
 import EditUserModal from '../../modals/edit-user';
 
 const UsersPage = () => {
@@ -36,7 +36,7 @@ const UsersPage = () => {
 
             setUsers(transformedData);
         })
-    }, [data]);
+    }, [users]);
 
     return (
         <div className='page users-page'>

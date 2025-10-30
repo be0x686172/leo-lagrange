@@ -5,8 +5,8 @@ import SelectUI from '../../components/ui/select';
 import SwitchUI from '../../components/ui/switch';
 import { useEffect, useState } from 'react';
 import ButtonUI from '../../components/ui/button';
-import { supabaseGetUserById } from '../../services/supabase/supabaseDatabase';
-import { data } from 'react-router';
+import { supabaseGetUserById } from '../../services/supabase/supabaseUsersDatabase';
+import { supabaseUpdateUser } from '../../services/supabase/supabaseUsersDatabase';
 
 const EditUserModal = ({userId, setOpenEditUserModal}) => {
     
@@ -24,7 +24,9 @@ const EditUserModal = ({userId, setOpenEditUserModal}) => {
 
     function handleForm(event) {
         event.preventDefault();
-        console.log(user);
+        supabaseUpdateUser(user).then((success) => {
+            console.log(success);
+        });
     }
     
     return (
