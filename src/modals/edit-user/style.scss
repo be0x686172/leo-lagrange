@@ -7,6 +7,7 @@
     padding: 25px 40px;
     border: 1px solid var(--common-neutral-border-color);
     border-radius: 7px;
+    animation: slideIn 0.17s ease-out forwards;
 
     & > div {
         position: relative;
@@ -94,4 +95,15 @@
             }
         }
     }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translate(100%, -50%);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
 }

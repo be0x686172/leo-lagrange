@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import ButtonUI from '../../components/ui/button';
 import { supabaseGetUserById } from '../../services/supabase/supabaseUsersDatabase';
 import { supabaseUpdateUser } from '../../services/supabase/supabaseUsersDatabase';
+import { supabaseDeleteUser } from '../../services/supabase/supabaseUsersAuth';
 
 const EditUserModal = ({userId, setOpenEditUserModal}) => {
     
@@ -25,6 +26,12 @@ const EditUserModal = ({userId, setOpenEditUserModal}) => {
     function handleForm(event) {
         event.preventDefault();
         supabaseUpdateUser(user);
+        setOpenEditUserModal(false);
+    }
+
+    function deleteUser(event) {
+        event.preventDefault();
+        supabaseDeleteUser(user.id);
         setOpenEditUserModal(false);
     }
     
@@ -55,7 +62,7 @@ const EditUserModal = ({userId, setOpenEditUserModal}) => {
                     ) : ''}
                     <div>
                         <ButtonUI text={"Confirmer"} className={"button-primary"} action={(event) => handleForm(event)}/>
-                        <ButtonUI text={"Supprimer l'utilisateur"} className={"button-secondary"}/>
+                        <ButtonUI text={"Supprimer l'utilisateur"} className={"button-secondary"} action={(event) => deleteUser(event)} />
                     </div>
                 </form>
             </div>
