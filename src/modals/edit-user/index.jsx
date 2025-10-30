@@ -4,6 +4,7 @@ import TextInputUI from '../../components/ui/text-input';
 import SelectUI from '../../components/ui/select';
 import SwitchUI from '../../components/ui/switch';
 import { useState } from 'react';
+import ButtonUI from '../../components/ui/button';
 
 const EditUserModal = ({setOpenEditUserModal}) => {
 
@@ -30,6 +31,10 @@ const EditUserModal = ({setOpenEditUserModal}) => {
                     <div>
                         <label>Accès entretiens</label>
                         <SwitchUI id={"interviews_access"} isOn={interviewsAccess} handleToggle={() => setInterviewsAccess(!interviewsAccess)}/>
+                    </div>
+                    <div>
+                        <ButtonUI text={"Confirmer"} className={"button-primary"} />
+                        <ButtonUI text={"Supprimer l'utilisateur"} className={"button-secondary"}/>
                     </div>
                 </form>
             </div>
