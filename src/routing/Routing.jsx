@@ -6,6 +6,8 @@ import StatisticsPage from '../pages/statistics';
 import UsersPage from '../pages/users';
 import SupportPage from '../pages/support';
 import LogoutPage from '../pages/logout';
+import CandidatesPage from '../pages/candidates';
+import InterviewsPage from "../pages/interviews";
 
 const Routing = () => {
     return (
@@ -14,7 +16,10 @@ const Routing = () => {
                 <Route element={<Layout />}>
                     <Route path="*" element={<DashboardPage />} />
                     <Route index path="/" element={<DashboardPage />} />
-                    <Route path="/dashboard" element={<DashboardPage />} />
+                    <Route path="/dashboard" element={<DashboardPage />}>
+                        <Route path="candidates" element={<CandidatesPage />} />
+                        <Route path="interviews" element={<InterviewsPage />} />
+                    </Route>
                     <Route path="/statistics" element={<StatisticsPage />} />
                     <Route path="/users" element={<UsersPage />} />
                     <Route path="/support" element={<SupportPage />} />
