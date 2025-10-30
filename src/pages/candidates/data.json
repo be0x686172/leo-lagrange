@@ -1,10 +1,12 @@
 [
     {
         "id": "1",
-        "date": "13/10/2025",
+        "interviews_date": "13/10/2025",
         "name": "BEHAR",
         "firstname": "Abderahmane",
-        "job": "Animateur"
+        "job": "Animateur",
+        "status": "RDV à prendre",
+        "working_hours": []
     },
     {
         "id": "2",
