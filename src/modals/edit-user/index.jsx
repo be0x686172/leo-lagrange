@@ -24,9 +24,8 @@ const EditUserModal = ({userId, setOpenEditUserModal}) => {
 
     function handleForm(event) {
         event.preventDefault();
-        supabaseUpdateUser(user).then((success) => {
-            console.log(success);
-        });
+        supabaseUpdateUser(user);
+        setOpenEditUserModal(false);
     }
     
     return (
