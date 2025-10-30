@@ -7,14 +7,15 @@ import usersData from './data.json';
 import { Pen } from 'lucide-react';
 import BadgeUI from '../../components/ui/badge';
 import { supabaseGetUsers } from '../../services/supabase/supabaseDatabase';
+import EditUserModal from '../../modals/edit-user';
 
 const UsersPage = () => {
 
     const [users, setUsers] = useState([]);
     let navigate = useNavigate();
+    const [openEditUserModal, setOpenEditUserModal] = useState(false);
     
     useEffect(() => {
-    
         supabaseGetSession()
         .then((data) => {
             if (!data.session)
@@ -29,7 +30,7 @@ const UsersPage = () => {
                 role: user.role ? <BadgeUI text={user.role} className={"badge-default"} /> : <BadgeUI text={"Aucun statut"} className={"badge-default"} />,
                 candidates_access: user.candidates_access ? <BadgeUI text={"OUI"} className={"badge-secondary"} /> : <BadgeUI text={"NON"} className={"badge-primary-false"} />,
                 interviews_access: user.interviews_access ? <BadgeUI text={"OUI"} className={"badge-secondary"} /> : <BadgeUI text={"NON"} className={"badge-primary-false"} />,
-                action: <Pen size={17} style={{cursor: "pointer", display: "block"}} onClick={() => console.log(user.id)} />  // On "transforme" la clé en JSX
+                action: <Pen size={17} style={{cursor: "pointer", display: "block"}} onClick={() => setOpenEditUserModal(!openEditUserModal)} />  // On "transforme" la clé en JSX
             }));
 
             setUsers(transformedData);
@@ -39,6 +40,7 @@ const UsersPage = () => {
     return (
         <div className='page users-page'>
             <TableContainerFeature version={"users"} columns={["E-mail", "Nom", "Prénom", "Statut", "Accès candidats", "Accès entretiens", "Action"]} data={users} lengthData={Object.keys(usersData).length} />
+            {openEditUserModal ? <EditUserModal setOpenEditUserModal={setOpenEditUserModal} /> : ''}
         </div>
     );
 };
