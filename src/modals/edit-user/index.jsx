@@ -6,8 +6,8 @@ import SwitchUI from '../../components/ui/switch';
 import { useState } from 'react';
 import ButtonUI from '../../components/ui/button';
 
-const EditUserModal = ({setOpenEditUserModal}) => {
-
+const EditUserModal = ({userId, setOpenEditUserModal}) => {
+    
     const [candidatesAccess, setCandidatesAccess] = useState(false);
     const [interviewsAccess, setInterviewsAccess] = useState(false);
     
