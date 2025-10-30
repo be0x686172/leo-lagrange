@@ -2,9 +2,11 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -60%);
     background-color: var(--common-neutral-background-color-white);
-    padding: 20px;
+    padding: 25px 40px;
+    border: 1px solid var(--common-neutral-border-color);
+    border-radius: 7px;
 
     & > div {
         position: relative;
@@ -29,6 +31,12 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
+
+            & > div:first-of-type {
+                display: flex;
+                gap: 50px;
+            }
+            
             .text-input-ui {
                 display: flex;
                 align-items: center;
@@ -42,9 +50,18 @@
                     flex: 1;
                 }
             }
-            & > div:first-of-type {
+
+            .select-ui {
                 display: flex;
-                gap: 50px;
+                align-items: center;
+
+                label {
+                    width: 120px;
+                }
+
+                select {
+                    flex: 1;
+                }
             }
         }
     }
