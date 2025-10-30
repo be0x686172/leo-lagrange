@@ -1,6 +1,6 @@
 import './style.scss';
 
-const TextInputUI = ({label, name, type, placeholder, action}) => {
+const TextInputUI = ({label, name, type, placeholder, value, action}) => {
     return (
         <div className='text-input-ui'>
             {label ? <label htmlFor={name}>{label}</label> : ''}
@@ -8,6 +8,7 @@ const TextInputUI = ({label, name, type, placeholder, action}) => {
                 type={type}
                 name={name}
                 placeholder={placeholder}
+                value={value || ''}
                 onChange={action ? e => action(prev => ({...prev, [name]: e.target.value})) : () => {}}
             />
         </div>
