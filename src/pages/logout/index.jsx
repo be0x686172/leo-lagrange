@@ -8,9 +8,8 @@ const LogoutPage = () => {
 
     useEffect(() => {
         supabaseSignOut()
-        .then(() => {
-            navigate('/login');
-        });
+        .then(() => { navigate('/login'); })
+        .catch(() => { navigate('/login'); });
     })
 
     return (
