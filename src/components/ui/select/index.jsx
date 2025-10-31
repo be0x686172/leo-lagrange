@@ -1,6 +1,6 @@
 import './style.scss';
 
-const SelectUI = ({ label, name, value, action }) => {
+const SelectUI = ({ label, name, value, options, action }) => {
     return (
         <div className='select-ui'>
             <label htmlFor={name}>{label}</label>
@@ -8,13 +8,15 @@ const SelectUI = ({ label, name, value, action }) => {
                 name={name} 
                 id={name}
                 value={value || ''}
-                    onChange={(e) =>
+                onChange={(e) =>
                     action(prev => ({ ...prev, [name]: e.target.value }))
                 }
             >
-                    <option value="Coordinateur">Coordinateur</option>
-                    <option value="Assitant RH">Assistant RH</option>
-                    <option value="Administrateur">Administrateur</option>
+                {options.map((option, index) => (
+                    <option key={index} value={option}>
+                        {option}
+                    </option>
+                ))}
             </select>
         </div>
     );

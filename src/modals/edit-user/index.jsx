@@ -45,7 +45,7 @@ const EditUserModal = ({userId, setOpenEditUserModal}) => {
                     </div>
                     <TextInputUI label="E-mail" name={"email"} type={"email"} value={user?.email} action={setUser}/>
                     <TextInputUI label="Mot de passe" name={"password"} value={user?.password} type={"password"} action={setUser} />
-                    <SelectUI label={"Statut"} name={"role"} value={user?.role} action={setUser} />
+                    <SelectUI label={"Statut"} name={"role"} value={user?.role} options={["Coordinateur", "Assistant RH", "Administrateur"]} action={setUser} />
                     {user ? (
                         <div>
                             <label>Accès candidats</label>

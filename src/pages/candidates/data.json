@@ -5,14 +5,7 @@
         "name": "BEHAR",
         "firstname": "Abderahmane",
         "job": "Animateur",
-        "status": "RDV à prendre",
+        "status_before_interviews": "RDV à prendre",
         "working_hours": []
-    },
-    {
-        "id": "2",
-        "date": "12/10/2025",
-        "name": "Rahala",
-        "firstname": "Anas",
-        "job": "Coordinateur"
     }
 ]

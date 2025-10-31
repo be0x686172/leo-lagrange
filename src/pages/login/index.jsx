@@ -26,7 +26,7 @@ const LoginPage = () => {
 
         if (data && data.user) {
             setError("");
-            navigate('/dashboard');
+            navigate('/dashboard/candidates');
         }
     }
 
