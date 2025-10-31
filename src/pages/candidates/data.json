@@ -1,11 +1,17 @@
 [
     {
         "id": "1",
-        "interviews_date": "13/10/2025",
+        "application_date": "13/10/2025",
         "name": "BEHAR",
         "firstname": "Abderahmane",
         "job": "Animateur",
         "status_before_interviews": "RDV à prendre",
-        "working_hours": []
+        "working_hours": [],
+        "district": [],
+        "phone_number": "07 66 78 61 78",
+        "email": "jamais@gmail.com",
+        "diploma": ["B.A.F.A"],
+        "children_experience": false,
+        "commentary": "Il fait très beau à Marseille"
     }
 ]

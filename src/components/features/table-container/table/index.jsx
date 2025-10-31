@@ -1,6 +1,6 @@
 import './style.scss';
 
-const TableTableContainerFeature = ({ version, columns, data, lengthData }) => {
+const TableTableContainerFeature = ({ clickable, version, columns, data, lengthData }) => {
     return (
         <table className='table-table-container-feature'>
             <thead>
@@ -14,7 +14,7 @@ const TableTableContainerFeature = ({ version, columns, data, lengthData }) => {
                 {data.map((row, i) => (
                     <tr key={row.id}>
                         {Object.entries(row).filter(([key]) => key !== "id").map(([key, cell], j) => (
-                            <td key={j}>{cell}</td>
+                            <td key={j} className={clickable ? "clickable": ''}>{cell}</td>
                         ))}
                     </tr>
                 ))}

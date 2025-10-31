@@ -13,7 +13,7 @@ const CandidatesPage = () => {
         const transformedData = candidatesData.map(candidat => ({
             id: candidat.id,
             "⏳": <Hourglass color='#c4c4c4ff' size={19} />,
-            interviews_date: candidat.interviews_date,
+            interviews_date: candidat.application_date,
             name: candidat.name.toUpperCase(),
             firstname: candidat.firstname,
             job: <BadgeUI text={candidat.job} className={"badge-default"} />,
@@ -24,7 +24,7 @@ const CandidatesPage = () => {
 
     return (
         <div className="page candidates-page">
-            <TableContainerFeature version={"candidates"} columns={[<Hourglass color='#c4c4c4ff' size={19}/>, "Date de candidature", "Nom", "Prénom", "Poste"]} data={candidates} lengthData={Object.keys(candidatesData).length}/>
+            <TableContainerFeature clickable={true} version={"candidates"} columns={[<Hourglass color='#c4c4c4ff' size={19}/>, "Date de candidature", "Nom", "Prénom", "Poste"]} data={candidates} lengthData={Object.keys(candidatesData).length}/>
         </div>
     );
 };
