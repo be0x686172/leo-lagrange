@@ -14,7 +14,7 @@ const TableContainerFeature = ({ clickable, version, columns, data, lengthData }
             {version === 'users' ? <TableTableContainerFeature clickable={clickable} columns={columns} data={data} version={version} lengthData={lengthData}/> : (
                 <div>
                     <TableTableContainerFeature clickable={clickable} columns={columns} data={data} version={version} lengthData={lengthData} setCandidatId={setCandidatId} />
-                    <ViewInformationsCandidatesTableContainerFeature userId={candidatId} />
+                    <ViewInformationsCandidatesTableContainerFeature candidatId={candidatId} />
                 </div>
             )}
         </div>

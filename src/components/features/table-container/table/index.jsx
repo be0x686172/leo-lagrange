@@ -12,7 +12,7 @@ const TableTableContainerFeature = ({ clickable, version, columns, data, lengthD
             </thead>
             <tbody>
                 {data.map((row, i) => (
-                    <tr key={row.id} onClick={() => {setCandidatId(row.id)}}>
+                    <tr key={row.id} onClick={setCandidatId ? () => {setCandidatId(row.id)} : () => {}}>
                         {Object.entries(row).filter(([key]) => key !== "id").map(([key, cell], j) => (
                             <td key={j} className={clickable ? "clickable": ''}>{cell}</td>
                         ))}
