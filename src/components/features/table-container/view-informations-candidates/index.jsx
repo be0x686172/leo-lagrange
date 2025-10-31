@@ -24,7 +24,7 @@ const ViewInformationsCandidatesTableContainerFeature = ({ candidatId }) => {
                         <div>
                             <p>Horaires</p>
                             {candidat.working_hours ? candidat.working_hours.map((hours) => {
-                                <p>{hours}</p>
+                                {console.log(hours)}
                             }) : ''}
                         </div>
                     </div>
