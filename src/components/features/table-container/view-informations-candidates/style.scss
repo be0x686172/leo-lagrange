@@ -10,11 +10,19 @@
         text-align: center;
     }
 
-    h2 {
-        span {
-            text-transform: uppercase;
+    & > div:first-of-type {
+        h2 {
+            span {
+                text-transform: uppercase;
+            }
+            font-weight: 800;
         }
-        font-weight: 800;
+
+        p {
+            margin-top: 3px;
+            font-size: var(--font-size-s);
+            font-weight: 500;
+        }
     }
 }
 

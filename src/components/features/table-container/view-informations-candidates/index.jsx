@@ -1,6 +1,7 @@
 import './style.scss';
 import candidatesData from '../../../../pages/candidates/data.json';
 import { useEffect, useState } from 'react';
+import BadgeUI from '../../../ui/badge';
 
 const ViewInformationsCandidatesTableContainerFeature = ({ candidatId }) => {
     
@@ -14,7 +15,17 @@ const ViewInformationsCandidatesTableContainerFeature = ({ candidatId }) => {
     return (
         <div className={`view-informations-candidates-table-container-feature ${candidatId == null ? 'view-informations-candidates-table-container-feature-center': ''}`}>
             {candidatId == null ? <p className='no-candidat-id'>Sélectionnez un candidat pour consulter sa fiche</p> : (
-                <h2><span>{candidat.name}</span> {candidat.firstname}</h2>
+                <>
+                    <div>
+                        <h2><span>{candidat.name}</span> {candidat.firstname}</h2>
+                        <p>{candidat.job}</p>
+                    </div>
+                    <div>
+                        <div>
+                            <p>Horaires</p>
+                        </div>
+                    </div>
+                </>
             )}
         </div>
     );
