@@ -17,12 +17,15 @@ const ViewInformationsCandidatesTableContainerFeature = ({ candidatId }) => {
             {candidatId == null ? <p className='no-candidat-id'>Sélectionnez un candidat pour consulter sa fiche</p> : (
                 <>
                     <div>
-                        <h2><span>{candidat.name}</span> {candidat.firstname}</h2>
+                        <h1><span>{candidat.name}</span> {candidat.firstname}</h1>
                         <p>{candidat.job}</p>
                     </div>
                     <div>
                         <div>
                             <p>Horaires</p>
+                            {candidat.working_hours ? candidat.working_hours.map((hours) => {
+                                <p>{hours}</p>
+                            }) : ''}
                         </div>
                     </div>
                 </>

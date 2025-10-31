@@ -4,6 +4,7 @@
     border-left: 1px solid var(--common-neutral-border-color);
     padding: 30px;
     width: 450px;
+    gap: 20px;
 
     .no-candidat-id {
         font-size: var(--font-size-s);
@@ -11,17 +12,30 @@
     }
 
     & > div:first-of-type {
-        h2 {
+        h1 {
             span {
                 text-transform: uppercase;
             }
-            font-weight: 800;
+            font-weight: 900;
         }
 
         p {
             margin-top: 3px;
             font-size: var(--font-size-s);
             font-weight: 500;
+        }
+    }
+
+    & > div:nth-child(2) {
+        div {
+            & > p:first-of-type {
+                font-size: var(--font-size-s);
+                color: #737373;
+            }
+
+            p {
+                font-size: var(--font-size-s);
+            }
         }
     }
 }
