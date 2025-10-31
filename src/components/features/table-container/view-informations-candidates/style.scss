@@ -1,3 +1,15 @@
 .view-informations-candidates-table-container-feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     border-left: 1px solid var(--common-neutral-border-color);
+
+    .no-candidat-id {
+        font-size: var(--font-size-s);
+        text-align: center;
+    }
+}
+
+.view-informations-candidates-table-container-feature-center {
+    justify-content: center;
 }

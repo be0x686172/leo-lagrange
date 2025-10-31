@@ -6,12 +6,27 @@
         "firstname": "Abderahmane",
         "job": "Animateur",
         "status_before_interviews": "RDV à prendre",
-        "working_hours": [],
-        "district": [],
+        "working_hours": ["7h20-8h30"],
+        "district": [1, 4],
         "phone_number": "07 66 78 61 78",
         "email": "jamais@gmail.com",
         "diploma": ["B.A.F.A"],
         "children_experience": false,
         "commentary": "Il fait très beau à Marseille"
+    },
+    {
+        "id": "2",
+        "application_date": "12/09/2024",
+        "name": "Touril",
+        "firstname": "Ibrahim",
+        "job": "Assistant",
+        "status_before_interviews": "Candidat à rappeler",
+        "working_hours": [],
+        "district": [7, 8, 9],
+        "phone_number": "06 10 22 23 65",
+        "email": "battlefield@gmail.com",
+        "diploma": ["B.A.F.A"],
+        "children_experience": true,
+        "commentary": "Il pleut à Valenciennes"
     }
 ]
