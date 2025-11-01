@@ -1,28 +1,30 @@
 import { useEffect, useState } from 'react';
 import TableContainerFeature from '../../components/features/table-container/container';
-import candidatesData from './data.json';
 import BadgeUI from '../../components/ui/badge';
 import { Hourglass } from 'lucide-react';
+import { supabaseGetCandidates } from '../../services/supabase/supabaseCandidatesDatabase'
 
 const InterviewsPage = () => {
 
     const [candidates, setCandidates] = useState([]);
-    const lengthData = candidatesData.length;
+    const lengthData = candidates.length;
     const [slice, setSlice] = useState([0, 11]);
 
     useEffect(() => {
-        const transformedData = candidatesData.map(candidat => ({
-            id: candidat.id,
-            interviews_date: candidat.application_date,
-            name: candidat.name.toUpperCase(),
-            firstname: candidat.firstname,
-            job: <BadgeUI text={candidat.job} className={"badge-default"} />,
-            interview_status: <BadgeUI text={candidat.interview_status} className={"badge-primary"} />,
-            interview_decision: <BadgeUI text={candidat.interview_decision} className={"badge-secondary"} />
-        }));
+        supabaseGetCandidates().then((data) => {
+                const transformedData = data.map(candidat => ({
+                id: candidat.id,
+                interviews_date: candidat.application_date,
+                name: candidat.name.toUpperCase(),
+                firstname: candidat.firstname,
+                job: <BadgeUI text={candidat.job} className={"badge-default"} />,
+                interview_status: <BadgeUI text={candidat.interview_status} className={"badge-primary"} />,
+                interview_decision: <BadgeUI text={candidat.interview_decision} className={"badge-secondary"} />
+            }));
 
-        setCandidates(transformedData.slice(slice[0], slice[1]));
-    }, [candidatesData, slice]);
+            setCandidates(transformedData.slice(slice[0], slice[1]));
+        })
+    }, [candidates, slice]);
 
     // Fonction pour changer de tranche
     const changeSlice = (direction) => {
