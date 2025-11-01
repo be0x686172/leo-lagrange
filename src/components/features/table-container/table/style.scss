@@ -1,6 +1,4 @@
 .table-table-container-feature {
-    
-    table-layout: fixed;
     width: 100%;
     border-collapse: collapse;
 
@@ -13,6 +11,10 @@
             text-align: left;
             border-bottom: 1px solid var(--common-neutral-border-color);
         }
+
+        th:first-child {
+            width: 0px; // ou moins selon besoin
+        }   
 
         .little-first {
             &:first-child {
@@ -29,6 +31,10 @@
 
     tbody {
         width: 100%;
+
+        td:first-child {
+            width: 0px; // ou moins selon besoin
+        }   
 
         tr {
             transition: background-color 0.15s ease-in-out;
@@ -84,4 +90,8 @@
             }
         }
     }
+}
+
+.fixed {
+    table-layout: fixed;
 }

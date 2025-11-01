@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const TableTableContainerFeature = ({ clickable, version, columns, data, lengthData, setCandidatId, slice, changeSlice }) => {
     return (
-        <table className='table-table-container-feature'>
+        <table className={`table-table-container-feature ${version == "candidates" ? 'fixed' : ''}`}>
             <thead>
                 <tr>
                     {columns.map((column, i) => (
