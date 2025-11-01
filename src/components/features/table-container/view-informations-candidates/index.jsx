@@ -5,13 +5,13 @@ import ButtonUI from '../../../ui/button';
 import { supabaseGetCandidateById } from '../../../../services/supabase/supabaseCandidatesDatabase';
 
 const ViewInformationsCandidatesTableContainerFeature = ({ candidatId }) => {
-    
     const [candidat, setCandidat] = useState({});
 
     useEffect(() => {
-        supabaseGetCandidateById(candidatId).then((data) => {
-            if (data) setCandidat({...data[0]});
-        })
+        if (candidatId)
+            supabaseGetCandidateById(candidatId).then((data) => {
+                if (data) setCandidat({...data[0]});
+            })
     }, [candidatId])
 
     return (
@@ -60,7 +60,9 @@ const ViewInformationsCandidatesTableContainerFeature = ({ candidatId }) => {
                         <div>
                             <p>Diplôme :</p>
                             <div>
-                                <p>{candidat.diploma}</p>
+                                {candidat.diploma ? candidat.diploma.map((diploma, i) => (
+                                    <BadgeUI text={diploma} key={i} className={"badge-secondary"} />
+                                )) : ''}
                             </div>
                         </div>
                         <div>
