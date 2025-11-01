@@ -1,16 +1,17 @@
 import './style.scss';
-import candidatesData from '../../../../pages/candidates/data.json';
 import { useEffect, useState } from 'react';
 import BadgeUI from '../../../ui/badge';
 import ButtonUI from '../../../ui/button';
+import { supabaseGetCandidateById } from '../../../../services/supabase/supabaseCandidatesDatabase';
 
 const ViewInformationsCandidatesTableContainerFeature = ({ candidatId }) => {
     
     const [candidat, setCandidat] = useState({});
 
     useEffect(() => {
-        const found = candidatesData.find((candidat) => candidat.id == candidatId);
-        if (found) setCandidat({...found});
+        supabaseGetCandidateById(candidatId).then((data) => {
+            if (data) setCandidat({...data[0]});
+        })
     }, [candidatId])
 
     return (

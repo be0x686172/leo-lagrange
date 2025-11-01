@@ -14,9 +14,7 @@ const EditUserModal = ({userId, setOpenEditUserModal}) => {
 
     useEffect(() => {
         supabaseGetUserById(userId).then((data) => {
-            setUser({
-                ...data[0]
-            });
+            setUser({...data[0]});
         })
     }, [userId]);
 

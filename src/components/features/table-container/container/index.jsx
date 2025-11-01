@@ -5,7 +5,6 @@ import ViewInformationsCandidatesTableContainerFeature from '../view-information
 import { useState } from 'react';
 
 const TableContainerFeature = ({ clickable, version, columns, data, lengthData, slice, changeSlice }) => {
-    
     const [candidatId, setCandidatId] = useState(null);
 
     return (

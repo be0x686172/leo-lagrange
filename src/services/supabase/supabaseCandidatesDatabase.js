@@ -2,12 +2,12 @@ import { supabase } from "./supabaseClient";
 
 export async function supabaseGetCandidates() {
     let { data: candidates, error } = await supabase.from('candidates').select('*');
-    return users;
+    return candidates;
 }
 
 export async function supabaseGetCandidateById(candidateId) {
     let { data: candidate, error } = await supabase.from('candidates').select("*").eq('id', candidateId);
-    return user;
+    return candidate;
 }
 
 export async function supabaseUpdateCandidate(candidat) {
