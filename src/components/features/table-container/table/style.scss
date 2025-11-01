@@ -60,6 +60,22 @@
                 font-size: var(--font-size-s);
                 font-weight: 500;
             }
+
+            & > th:last-of-type {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 15px;
+
+                p {
+                    margin-top: -1.5px;
+                    font-size: 16px;
+                }
+
+                svg {
+                    cursor: pointer;
+                }
+            }
         }
     }
 }

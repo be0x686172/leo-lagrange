@@ -14,6 +14,8 @@ const UsersPage = () => {
     let navigate = useNavigate();
     const [openEditUserModal, setOpenEditUserModal] = useState(false);
     const [userId, setUserId] = useState(null);
+    const lengthData = users.length;
+    const [slice, setSlice] = useState([0, lengthData > 10 ? 10 : lengthData]);
     
     useEffect(() => {
         supabaseGetSession()
@@ -34,12 +36,36 @@ const UsersPage = () => {
             }));
 
             setUsers(transformedData);
+
+            setSlice([0, transformedData.length > 10 ? 10 : transformedData.length]);
         })
-    }, [users]);
+    }, [users, slice]);
+
+    // Fonction pour changer de tranche
+    const changeSlice = (direction) => {
+        setSlice(prev => {
+            let start = prev[0] + direction * 10;
+            let end = prev[1] + direction * 10;
+
+            // Limiter à 0 minimum
+            if (start < 0) {
+                start = 0;
+                end = 10;
+            }
+
+            // Limiter à la longueur max
+            if (end > lengthData) {
+                end = lengthData;
+                start = Math.max(lengthData - 10, 0); // au cas où moins de 10 restant
+            }
+
+            return [start, end];
+        });
+    }
 
     return (
         <div className='page users-page'>
-            <TableContainerFeature clickable={false} version={"users"} columns={["E-mail", "Nom", "Prénom", "Statut", "Accès candidats", "Accès entretiens", "Action"]} data={users} lengthData={Object.keys(users).length} />
+            <TableContainerFeature clickable={false} version={"users"} columns={["E-mail", "Nom", "Prénom", "Statut", "Accès candidats", "Accès entretiens", "Action"]} data={users} lengthData={Object.keys(users).length} slice={slice} changeSlice={changeSlice} />
             {openEditUserModal ? <EditUserModal userId={userId} setOpenEditUserModal={setOpenEditUserModal} /> : ''}
         </div>
     );
