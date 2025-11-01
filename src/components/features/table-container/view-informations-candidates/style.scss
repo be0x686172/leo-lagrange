@@ -3,7 +3,7 @@
     flex-direction: column;
     border-left: 1px solid var(--common-neutral-border-color);
     padding: 30px;
-    width: 450px;
+    width: 400px;
     gap: 20px;
 
 
@@ -42,7 +42,7 @@
             div {  
                 display: flex;
                 gap: 7px;
-                margin-top: 3px;
+                margin-top: 5px;
                 
                 .badge-default {
                     p {

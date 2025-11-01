@@ -25,7 +25,7 @@ const CandidatesPage = () => {
 
     return (
         <div className="page candidates-page">
-            <TableContainerFeature clickable={true} version={"candidates"} columns={[<Hourglass color='#c4c4c4ff' size={19}/>, "Date de candidature", "Nom", "Prénom", "Poste", "Status"]} data={candidates} lengthData={Object.keys(candidatesData).length}/>
+            <TableContainerFeature clickable={true} version={"candidates"} columns={[<Hourglass color='#c4c4c4ff' size={19}/>, "Date de candidature", "Nom", "Prénom", "Poste", "Statut"]} data={candidates} lengthData={Object.keys(candidatesData).length}/>
         </div>
     );
 };
