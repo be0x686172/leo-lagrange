@@ -13,6 +13,12 @@
             text-align: left;
             border-bottom: 1px solid var(--common-neutral-border-color);
         }
+
+        .little-first {
+            &:first-child {
+                width: 50px;
+            }
+        }
     }
 
     tbody {
