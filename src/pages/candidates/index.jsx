@@ -3,7 +3,6 @@ import TableContainerFeature from '../../components/features/table-container/con
 import candidatesData from './data.json';
 import BadgeUI from '../../components/ui/badge';
 import { Hourglass } from 'lucide-react';
-import SelectUI from "../../components/ui/select";
 
 const CandidatesPage = () => {
 
