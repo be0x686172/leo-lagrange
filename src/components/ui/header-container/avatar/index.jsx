@@ -21,7 +21,7 @@ const AvatarUI = ({ openHeader }) => {
 
     return (
         <div className='avatar-ui'>
-            <div><p><span>M</span><span>B</span></p></div>
+            <div><p><span>{user.firstname[0]}</span><span>{user.name[0]}</span></p></div>
             {openHeader ? <p><span>{user.firstname}</span> <br /> <span>{user.name}</span></p> : ''}
         </div>
     );
