@@ -7,7 +7,7 @@ const TableTableContainerFeature = ({ clickable, version, columns, data, lengthD
             <thead>
                 <tr>
                     {columns.map((column, i) => (
-                        <th className={version == "candidates" ? 'little-first' : 'first'} key={i}>{column}</th>
+                        <th className={version == "candidates" ? 'little-first' : version == "users" ? 'first' : ''} key={i}>{column}</th>
                     ))}
                 </tr>
             </thead>
