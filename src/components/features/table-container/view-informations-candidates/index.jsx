@@ -3,9 +3,13 @@ import { useEffect, useState } from 'react';
 import BadgeUI from '../../../ui/badge';
 import ButtonUI from '../../../ui/button';
 import { supabaseGetCandidateById } from '../../../../services/supabase/supabaseCandidatesDatabase';
+import ScheduleInterviewModal from '../../../../modals/schedule_interview';
 
 const ViewInformationsCandidatesTableContainerFeature = ({ candidatId }) => {
+    
     const [candidat, setCandidat] = useState({});
+    const [openScheduleInterviewModal, setOpenScheduleInterviewModal] = useState(false);
+
 
     useEffect(() => {
         if (candidatId)
@@ -79,10 +83,11 @@ const ViewInformationsCandidatesTableContainerFeature = ({ candidatId }) => {
                         </div>
                     </div>
                     <div className='footer'>
-                        <ButtonUI text={"Planifier un entretien"} className={"button-primary"}/>
+                        <ButtonUI text={"Planifier un entretien"} className={"button-primary"} action={() => { setOpenScheduleInterviewModal(true); }}/>
                         <ButtonUI text={"Voir le CV"} className={"button-tertiary"}/>
                     </div>
                     <p className='responsible'>Responsable : <span>{candidat.responsible}</span></p>
+                    {openScheduleInterviewModal ? <ScheduleInterviewModal candidatId={candidatId} setOpenScheduleInterviewModal={setOpenScheduleInterviewModal} /> : ''}
                 </>
             )}
         </div>
