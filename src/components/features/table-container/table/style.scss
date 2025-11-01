@@ -1,5 +1,6 @@
 .table-table-container-feature {
     
+    table-layout: fixed;
     width: 100%;
     border-collapse: collapse;
 
@@ -28,9 +29,12 @@
                 padding: 15px;
                 text-align: left;
                 font-size: var(--font-size-s);
+                vertical-align: middle;
+                height: auto;
             }
 
             .clickable {
+                height: auto;
                 cursor: pointer;
             }
         }

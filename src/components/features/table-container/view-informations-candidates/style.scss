@@ -6,12 +6,13 @@
     width: 450px;
     gap: 20px;
 
+
     .no-candidat-id {
         font-size: var(--font-size-s);
         text-align: center;
     }
 
-    & > div:first-of-type {
+    .header {
         h1 {
             span {
                 text-transform: uppercase;
@@ -26,15 +27,47 @@
         }
     }
 
-    & > div:nth-child(2) {
-        div {
+    .main {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        
+        div {        
+            
             & > p:first-of-type {
                 font-size: var(--font-size-s);
                 color: #737373;
             }
 
-            p {
-                font-size: var(--font-size-s);
+            div {  
+                display: flex;
+                gap: 7px;
+                margin-top: 3px;
+                
+                .badge-default {
+                    p {
+                        font-size: var(--font-size-xs) !important;
+                    }
+                }
+
+                p {
+                    color: var(--common-neutral-text-color) !important;
+                }
+            }
+        }
+
+        .commentary {
+            display: flex;
+            flex-direction: column;
+            div {
+                flex: 1;
+                p {
+                    flex: 1;
+                    background-color: #F5F5F5;
+                    border: 1px solid #D4D4D4;
+                    padding: 5px 5px 15px;
+                    border-radius: 5px;
+                }
             }
         }
     }

@@ -41,6 +41,6 @@
     border: 1px solid var(--badge-default-border-color);
 
     p {
-        color: var(--badge-default-text-color);
+        color: var(--common-default-text-color) !important;
     }
 }
