@@ -71,6 +71,21 @@
             }
         }
     }
+
+    .footer {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .button-ui {
+            flex: 1;
+            padding: 8px;
+
+            p {
+                font-size: var(--font-size-s);
+            }
+        }
+    }
 }
 
 .view-informations-candidates-table-container-feature-center {

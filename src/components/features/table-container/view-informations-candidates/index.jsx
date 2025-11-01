@@ -2,6 +2,7 @@ import './style.scss';
 import candidatesData from '../../../../pages/candidates/data.json';
 import { useEffect, useState } from 'react';
 import BadgeUI from '../../../ui/badge';
+import ButtonUI from '../../../ui/button';
 
 const ViewInformationsCandidatesTableContainerFeature = ({ candidatId }) => {
     
@@ -73,6 +74,10 @@ const ViewInformationsCandidatesTableContainerFeature = ({ candidatId }) => {
                                 <p>{candidat.commentary}</p>
                             </div>
                         </div>
+                    </div>
+                    <div className='footer'>
+                        <ButtonUI text={"Planifier un entretien"} className={"button-primary"}/>
+                        <ButtonUI text={"Voir le CV"} className={"button-tertiary"}/>
                     </div>
                 </>
             )}
