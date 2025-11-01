@@ -79,6 +79,7 @@ const ViewInformationsCandidatesTableContainerFeature = ({ candidatId }) => {
                         <ButtonUI text={"Planifier un entretien"} className={"button-primary"}/>
                         <ButtonUI text={"Voir le CV"} className={"button-tertiary"}/>
                     </div>
+                    <p className='responsible'>Responsable : <span>{candidat.responsible}</span></p>
                 </>
             )}
         </div>

@@ -48,8 +48,12 @@
 
     tfoot {
         border-top: 1px solid var(--common-neutral-border-color);
+        white-space: pre;
 
         tr {
+            display: flex;
+            align-items: center;
+            
             th {
                 padding: 15px;
                 text-align: left;

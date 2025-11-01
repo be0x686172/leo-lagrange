@@ -1,6 +1,8 @@
 import './style.scss';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-const TableTableContainerFeature = ({ clickable, version, columns, data, lengthData, setCandidatId }) => {
+const TableTableContainerFeature = ({ clickable, version, columns, data, lengthData, setCandidatId, slice, setSlice }) => {
+    console.log(slice)
     return (
         <table className='table-table-container-feature'>
             <thead>
@@ -22,6 +24,7 @@ const TableTableContainerFeature = ({ clickable, version, columns, data, lengthD
             <tfoot>
                 <tr>
                     <th>{lengthData} {version == "users" ? "utilisateurs" : "candidats"}</th>
+                    <th><ChevronLeft size={20} /> <ChevronRight size={20} /></th>
                 </tr>
             </tfoot>
         </table>
