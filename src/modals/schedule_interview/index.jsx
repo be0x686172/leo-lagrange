@@ -22,13 +22,13 @@ const ScheduleInterviewModal = ({candidatId, setOpenScheduleInterviewModal}) => 
                 <X className='cross' onClick={() => {setOpenScheduleInterviewModal(false)}}/>
                 <p>Planifier un rendez-vous pour <span>{candidat.name}</span> <span>{candidat.firstname}</span></p>
                 <form>
-                    <label>Date et heure du rendez-vous</label>
-                    <div>
-                        <input type="date" />
-                        <input type="time" />
+                    <label>Date et heure du rendez-vous :</label>
+                    <div className='datetime-container'>
+                        <input type="date" className="date-input" />
+                        <input type="time" className="time-input" />
                     </div>
                 </form>
-                <p>Attention : Si vous confirmez le rendez-vous, un mail automatique sera envoyé au candidat.</p>
+                <p>Attention : Si vous confirmez le rendez-vous, un mail automatique sera envoyé au <br />candidat.</p>
                 <div>
                     <ButtonUI text={"Annuler"} className={"button-secondary"} action={() => {setOpenScheduleInterviewModal(false)}}/>
                     <ButtonUI text={"Confirmer le rendez-vous"} className={"button-primary"} action={() => {console.log('date save'); setOpenScheduleInterviewModal(false)}}/>
