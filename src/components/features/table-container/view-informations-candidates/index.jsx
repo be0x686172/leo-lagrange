@@ -35,7 +35,7 @@ const ViewInformationsCandidatesTableContainerFeature = ({ candidatId }) => {
                             <p>Arrondissements</p>
                             <div>
                                 {candidat.districts ? candidat.districts.map((district, i) => (
-                                    <BadgeUI text={district + 'er'} key={i} className={"badge-default"} />
+                                    <BadgeUI text={district + 'e'} key={i} className={"badge-default"} />
                                 )) : ''}
                             </div>
                         </div>
