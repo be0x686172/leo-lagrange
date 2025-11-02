@@ -81,6 +81,12 @@ const ViewInformationsCandidatesTableContainerFeature = ({ candidatId }) => {
                                 <p>{candidat.commentary}</p>
                             </div>
                         </div>
+                        <div>
+                            <p>Date et heure d'entretien :</p>
+                            <div>
+                                <p>{candidat.interview_date} {candidat.interview_time}</p>
+                            </div>
+                        </div>
                     </div>
                     <div className='footer'>
                         <ButtonUI text={"Planifier un entretien"} className={"button-primary"} action={() => { setOpenScheduleInterviewModal(true); }}/>
