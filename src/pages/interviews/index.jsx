@@ -14,7 +14,8 @@ const InterviewsPage = () => {
         supabaseGetCandidates().then((data) => {
                 const transformedData = data.map(candidat => ({
                 id: candidat.id,
-                interviews_date: candidat.application_date,
+                interviews_date: candidat.interview_date,
+                interview_time: candidat.interview_time,
                 name: candidat.name.toUpperCase(),
                 firstname: candidat.firstname,
                 job: <BadgeUI text={candidat.job} className={"badge-default"} />,
@@ -50,7 +51,7 @@ const InterviewsPage = () => {
 
     return (
         <div className="page interviews-page">
-            <TableContainerFeature clickable={true} version={"interviews"} columns={["Date d'entretien", "Nom", "Prénom", "Poste", "Statut d'entretien", "Décision"]} data={candidates} lengthData={lengthData} slice={slice} changeSlice={changeSlice} />
+            <TableContainerFeature clickable={true} version={"interviews"} columns={["Date d'entretien", "Heure d'entretien", "Nom", "Prénom", "Poste", "Statut d'entretien", "Décision"]} data={candidates} lengthData={lengthData} slice={slice} changeSlice={changeSlice} />
         </div>
     );
 };

@@ -19,3 +19,14 @@ export async function supabaseUpdateCandidate(candidat) {
     if (error) console.error(error);
     return data;
 }
+
+export async function supabaseUpdateInterviewDateTimeCandidate(candidatId, interview_date, interview_time) {
+    const { data, error } = await supabase
+    .from('candidates')
+    .update({
+        interview_date: interview_date,
+        interview_time: interview_time
+    })
+    .eq('id', candidatId)
+    .select();
+}
