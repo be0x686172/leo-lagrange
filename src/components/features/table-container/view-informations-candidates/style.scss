@@ -1,94 +1,127 @@
 .view-informations-candidates-table-container-feature {
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--common-neutral-border-color);
+  padding: 30px 30px 20px;
+  width: 430px;
+  gap: 20px;
+
+  .no-candidat-id {
+    font-size: var(--font-size-s);
+    text-align: center;
+  }
+
+  .header {
+    h1 {
+      span {
+        text-transform: uppercase;
+      }
+      font-weight: 900;
+    }
+
+    p {
+      margin-top: 3px;
+      font-size: var(--font-size-s);
+      font-weight: 500;
+    }
+  }
+
+  .main {
     display: flex;
     flex-direction: column;
-    border-left: 1px solid var(--common-neutral-border-color);
-    padding: 30px 30px 20px;
-    width: 430px;
-    gap: 20px;
+    gap: 15px;
 
+    .editable-field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
 
-    .no-candidat-id {
+      p {
         font-size: var(--font-size-s);
-        text-align: center;
-    }
-
-    .header {
-        h1 {
-            span {
-                text-transform: uppercase;
-            }
-            font-weight: 900;
-        }
-
-        p {
-            margin-top: 3px;
-            font-size: var(--font-size-s);
-            font-weight: 500;
-        }
-    }
-
-    .main {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        
-        div {        
-            
-            & > p {
-                font-size: var(--font-size-s);
-                color: #737373;
-            }
-
-            div {  
-                display: flex;
-                gap: 7px;
-                margin-top: 5px;
-                
-                .badge-default {
-                    p {
-                        font-size: var(--font-size-xs) !important;
-                    }
-                }
-
-                p {
-                    color: var(--common-neutral-text-color) !important;
-                }
-            }
-        }
-
-        .commentary {
-            display: flex;
-            flex-direction: column;
-        }
-    }
-
-    .footer {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-
-        .button-ui {
-            flex: 1;
-            padding: 8px;
-
-            p {
-                font-size: var(--font-size-s);
-            }
-        }
-    }
-
-    .responsible {
-        font-size: var(--font-size-xs);
         color: #737373;
-        font-weight: 300;
+      }
 
-        span {
-            color: #737373;
-            font-weight: 500;
+      .edit-section {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 5px;
+
+        .option {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          padding: 4px 8px;
+          border-radius: 6px;
+          border: 1px solid #ccc;
+          cursor: pointer;
+          transition: all 0.2s;
+
+          &:hover {
+            background-color: #f0f0f0;
+            border-color: var(--common-neutral-border-color);
+          }
+
+          input[type='checkbox'] {
+            cursor: pointer;
+          }
+
+          &.selected {
+            background-color: var(--primary-color-light);
+            border-color: var(--primary-color);
+          }
         }
+      }
+
+      .edit-buttons {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+      }
+
+      .input-text,
+      .textarea-commentary,
+      .select-diploma {
+        width: 100%;
+        padding: 0.4rem;
+        border-radius: 0.4rem;
+        border: 1px solid #ccc;
+      }
+
+      .textarea-commentary {
+        min-height: 80px;
+        resize: vertical;
+      }
     }
+  }
+
+  .footer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .button-ui {
+      flex: 1;
+      padding: 8px;
+
+      p {
+        font-size: var(--font-size-s);
+      }
+    }
+  }
+
+  .responsible {
+    font-size: var(--font-size-xs);
+    color: #737373;
+    font-weight: 300;
+
+    span {
+      color: #737373;
+      font-weight: 500;
+    }
+  }
 }
 
 .view-informations-candidates-table-container-feature-center {
-    justify-content: center;
+  justify-content: center;
 }
