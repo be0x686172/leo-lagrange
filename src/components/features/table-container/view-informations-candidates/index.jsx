@@ -30,7 +30,7 @@ const ViewInformationsCandidatesTableContainerFeature = ({ candidatId }) => {
 
     const toggleEditMode = () => {
         setEditMode(!editMode);
-        if (!editMode) setEditData({...candidat}); // Reset edits on entering edit mode
+        if (!editMode) setEditData({...candidat});
     };
 
     const handleChange = (field, value) => {
@@ -51,7 +51,7 @@ const ViewInformationsCandidatesTableContainerFeature = ({ candidatId }) => {
         try {
             const updatedData = await supabaseUpdateCandidate(editData);
             if (updatedData) {
-                setCandidat({ ...editData }); // Met à jour l'affichage
+                setCandidat({ ...editData });
                 setEditMode(false);
             } else {
                 console.error("Erreur lors de la sauvegarde");
