@@ -1,261 +1,277 @@
 import './style.scss';
-import { forwardRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import BadgeUI from '../../../ui/badge';
 import ButtonUI from '../../../ui/button';
 import { supabaseGetCandidateById } from '../../../../services/supabase/supabaseCandidatesDatabase';
+import { supabaseUpdateCandidate } from '../../../../services/supabase/supabaseCandidatesDatabase';
 import ScheduleInterviewModal from '../../../../modals/schedule_interview';
 
-const ViewInformationsCandidatesTableContainerFeature = forwardRef(({ candidatId, candidate, setCandidate, handleUpdateField}, ref) => {
+const ViewInformationsCandidatesTableContainerFeature = ({ candidatId }) => {
     
-    const horaires = ["7h20 - 8h30", "11h15 - 13h30", "16h10 - 18H", "16h10 - 18H30"]
-    const arrondissements = ["1er", "2e", "3e", "4e", "5e", "6e", "7e", "8e", "9e", "10e", "13e"]
-    const [showPopup, setShowPopup] = useState(false)
     const [candidat, setCandidat] = useState({});
     const [openScheduleInterviewModal, setOpenScheduleInterviewModal] = useState(false);
+    const [editMode, setEditMode] = useState(false);
+    const [editData, setEditData] = useState({});
+    const AVAILABLE_HOURS = ["7h20 - 8h30", "11h15 - 13h30", "16h10 - 18h", "16h10 - 18h30"];
+    const AVAILABLE_DISTRICTS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "13"];
+    const EXPERIENCE_OPTIONS = ["Oui", "Non"];
+    const AVAILABLE_DIPLOMAS = ["B.A.F.A", "C.A.P. petite enfance", "C.Q.P. Périscolaire", "C.P.J.E.P.S. ou B.A.P.A.A.T.", "B.P.J.E.P.S.", "Aucun diplôme pour le moment"];
 
     useEffect(() => {
-        if (candidatId)
+        if (candidatId) {
             supabaseGetCandidateById(candidatId).then((data) => {
-                if (data) setCandidat({...data[0]});
+                if (data) {
+                    setCandidat({...data[0]});
+                    setEditData({...data[0]});
+                }
             })
+        }
     }, [candidatId])
 
-    const handleSave = () => {
-        ;["email", "telephone", "provenance", "diplomes", "experience_enfants", "commentaire"].forEach((field) =>
-        handleUpdateField(candidate.id_candidat, field, candidate[field]),
-        )
-        setCandidate({ ...candidate, isEditing: false })
+    const toggleEditMode = () => {
+        setEditMode(!editMode);
+        if (!editMode) setEditData({...candidat}); // Reset edits on entering edit mode
+    };
 
-        setShowPopup(true)
-        setTimeout(() => setShowPopup(false), 2500) // disparaît après 2,5s
-    }
+    const handleChange = (field, value) => {
+        setEditData(prev => ({ ...prev, [field]: value }));
+    };
+
+    const handleAddDiploma = () => {
+        setEditData(prev => ({ ...prev, diploma: [...(prev.diploma || []), ""] }));
+    };
+
+    const handleDiplomaChange = (index, value) => {
+        const newDiplomas = [...(editData.diploma || [])];
+        newDiplomas[index] = value;
+        handleChange('diploma', newDiplomas);
+    };
+
+    const handleSave = async () => {
+        try {
+            const updatedData = await supabaseUpdateCandidate(editData);
+            if (updatedData) {
+                setCandidat({ ...editData }); // Met à jour l'affichage
+                setEditMode(false);
+            } else {
+                console.error("Erreur lors de la sauvegarde");
+            }
+        } catch (error) {
+            console.error("Erreur lors de la sauvegarde :", error);
+        }
+    };
 
     const handleCancel = () => {
-        if (candidate.originalData) {
-        // Restaure les anciennes valeurs
-        const { originalData } = candidate
-        setCandidate({ ...originalData, isEditing: false })
-        } else {
-        // Cas de sécurité
-        setCandidate({ ...candidate, isEditing: false })
-        }
-    }  
+        setEditData({...candidat});
+        setEditMode(false);
+    };
+
+    const renderEditableCheckboxes = (options, selectedValues, field) => {
+        return options.map(option => (
+            <label key={option} style={{ marginRight: "8px" }}>
+                <input
+                    type="checkbox"
+                    checked={selectedValues?.includes(option)}
+                    onChange={(e) => {
+                        let newValues = selectedValues || [];
+                        if (e.target.checked) newValues = [...newValues, option];
+                        else newValues = newValues.filter(val => val !== option);
+                        handleChange(field, newValues);
+                    }}
+                />
+                {option}
+            </label>
+        ));
+    };
 
     return (
         <div className={`view-informations-candidates-table-container-feature ${candidatId == null ? 'view-informations-candidates-table-container-feature-center': ''}`}>
             {candidatId == null ? <p className='no-candidat-id'>Sélectionnez un candidat pour consulter sa fiche</p> : (
                 <>
-                    <div className='header'>
-                        <h1><span>{candidat.name}</span> {candidat.firstname}</h1>
-                        {!candidate.isEditing && (
-                            <button
-                            className="edit-toggle-btn"
-                            onClick={() => {
-                                setCandidate({ ...candidate, isEditing: true, originalData: { ...candidate } })
+                    <div className='header' style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "16px 0" }}>
+                        <div>
+                            <h1 style={{ margin: 0 }}>
+                                <span>{candidat.name}</span> {candidat.firstname}
+                            </h1>
+                            <p>{candidat.job}</p>
+                        </div>
+
+                        <button 
+                            onClick={toggleEditMode} 
+                            style={{
+                                background: "none",
+                                border: "none",
+                                cursor: "pointer",
+                                fontSize: "18px"
                             }}
-                            >
+                        >
                             ✏️
-                            </button>
-                        )}  
+                        </button>
                     </div>
-                    <p>{candidat.job}</p>
+
                     <div className='main'>
                         <div>
                             <p>Horaires</p>
-                            <div>
-                                {candidat.working_hours ? candidat.working_hours.map((hours, i) => (
-                                    <BadgeUI text={hours} key={i} className={"badge-default"} />
-                                )) : ''}
+                            <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+                                {AVAILABLE_HOURS.map((hours, i) => {
+                                const isSelected = editMode
+                                    ? editData.working_hours?.includes(hours)
+                                    : candidat.working_hours?.includes(hours);
 
-                                {horaires.map((h, i) => {
-                                    const isSelected = candidate.working_hours?.some(
-                                    (d) => d.toLowerCase().replace(/\s/g, "") === h.toLowerCase().replace(/\s/g, "")
-                                    )
+                                const handleClick = () => {
+                                    if (!editMode) return; 
+                                    let newHours = editData.working_hours || [];
+                                    if (newHours.includes(hours)) {
+                                    newHours = newHours.filter(h => h !== hours);
+                                    } else {
+                                    newHours = [...newHours, hours];
+                                    }
+                                    handleChange("working_hours", newHours);
+                                };
 
-                                    return (
-                                    <div
-                                        key={i}
-                                        className={`horaire-item ${isSelected ? "selected" : ""} ${candidate.isEditing ? "editable" : ""}`}
-                                        onClick={() => {
-                                        if (!candidate.isEditing) return
-                                        let newDispo = [...(candidate.working_hours || [])]
-                                        if (isSelected) {
-                                            newDispo = newDispo.filter(
-                                            (d) => d.toLowerCase().replace(/\s/g, "") !== h.toLowerCase().replace(/\s/g, "")
-                                            )
-                                        } else {
-                                            newDispo.push(h)
-                                        }
-                                        setCandidate({ ...candidate, working_hours: newDispo })
-                                        }}
+                                return (
+                                    <span
+                                    key={i}
+                                    onClick={handleClick}
+                                    className={isSelected ? "badge-selected" : "badge-default"}
+                                    style={{
+                                        cursor: editMode ? "pointer" : "default",
+                                        userSelect: "none",
+                                        padding: "4px 8px",
+                                        borderRadius: "4px",
+                                        backgroundColor: isSelected ? "#f44336" : "#e0e0e0",
+                                        color: isSelected ? "white" : "black",
+                                        transition: "all 0.2s",
+                                    }}
                                     >
-                                        {h}
-                                    </div>
-                                    )
+                                    {hours}
+                                    </span>
+                                );
                                 })}
                             </div>
                         </div>
                         <div>
                             <p>Arrondissements</p>
-                            <div>
-                                {candidat.districts ? candidat.districts.map((district, i) => (
-                                    <BadgeUI text={district + 'e'} key={i} className={"badge-default"} />
-                                )) : ''}
+                            <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+                            {AVAILABLE_DISTRICTS.map((district, i) => {
+                            const selectedDistricts = editMode ? editData.districts || [] : candidat.districts || [];
+                            const isSelected = selectedDistricts.includes(district);
 
-                                {arrondissements.map((arr, i) => {
-                                    const isSelected = candidate.districts?.includes(arr)
-                                    return (
-                                    <div
-                                        key={i}
-                                        className={`arr-item ${isSelected ? "selected" : ""} ${candidate.isEditing ? "editable" : ""}`}
-                                        onClick={() => {
-                                        if (!candidate.isEditing) return
-                                        let newArr = [...(candidate.districts || [])]
-                                        if (isSelected) {
-                                            newArr = newArr.filter((a) => a !== arr)
-                                        } else {
-                                            newArr.push(arr)
-                                        }
-                                        setCandidate({ ...candidate, districts: newArr })
-                                        }}
-                                    >
-                                        {arr}
-                                    </div>
-                                    )
-                                })}
-                            </div>
+                            const handleClick = () => {
+                                if (!editMode) return;
+                                const current = editData.districts || [];
+                                const newDistricts = current.includes(district)
+                                ? current.filter(d => d !== district)
+                                : [...current, district];
+                                handleChange("districts", newDistricts);
+                            };
+
+                            return (
+                                <span
+                                key={i}
+                                onClick={handleClick}
+                                className={isSelected ? "badge-selected" : "badge-default"}
+                                style={{
+                                    cursor: editMode ? "pointer" : "default",
+                                    userSelect: "none",
+                                    padding: "4px 8px",
+                                    borderRadius: "4px",
+                                    backgroundColor: isSelected ? "#f44336" : "#e0e0e0",
+                                    color: isSelected ? "white" : "black",
+                                    transition: "all 0.2s",
+                                }}
+                                >
+                                {district}e
+                                </span>
+                            );
+                            })}
                         </div>
-                        <div>
-                            <p>Date de candidature :</p>
-                            <div>
-                                <p>{candidat.application_date}</p>
-                            </div>
                         </div>
                         <div>
                             <p>Téléphone :</p>
                             <div>
-                                <p>{candidat.phone_number}</p>
-
-                                {candidate.isEditing ? (
-                                    <div className="phone-input-group">
-                                        <select className="country-code">
-                                            <option value="+33">+33</option>
-                                        </select>
-                                        <input
-                                            type="text"
-                                            value={candidate.phone_number || ""}
-                                            onChange={(e) => setCandidate({ ...candidate, phone_number: e.target.value })}
-                                            placeholder="7 89 69 36 21"
-                                        />
-                                    </div>
-                                    ) : (
-                                    <p>{candidate.phone_number}</p>
+                                {editMode ? (
+                                    <input type="text" value={editData.phone_number || ''} onChange={e => handleChange('phone_number', e.target.value)} />
+                                ) : (
+                                    <p>{candidat.phone_number}</p>
                                 )}
                             </div>
                         </div>
                         <div>
                             <p>E-mail :</p>
                             <div>
-                                <p>{candidat.email}</p>
-
-                                {candidate.isEditing ? (
-                                    <input
-                                        type="email"
-                                        value={candidate.email || ""}
-                                        onChange={(e) => setCandidate({ ...candidate, email: e.target.value })}
-                                        placeholder="merroune.younsi@gmail.com"
-                                    />
-                                    ) : (
-                                    <p>{candidate.email}</p>
+                                {editMode ? (
+                                    <input type="text" value={editData.email || ''} onChange={e => handleChange('email', e.target.value)} />
+                                ) : (
+                                    <p>{candidat.email}</p>
                                 )}
                             </div>
                         </div>
                         <div>
                             <p>Diplôme :</p>
                             <div>
-                                {candidat.diploma ? candidat.diploma.map((diploma, i) => (
-                                    <BadgeUI text={diploma} key={i} className={"badge-secondary"} />
-                                )) : ''}
-
-                                {candidate.isEditing ? (
-                                <>
-                                    {candidate.diploma?.map((d, i) => (
-                                    <div key={i} className="field-item">
-                                        <select
-                                        value={d || ""}
-                                        onChange={(e) => {
-                                            const newDiplomes = [...candidate.diploma]
-                                            newDiplomes[i] = e.target.value
-                                            setCandidate({ ...candidate, diploma: newDiplomes })
-                                        }}
-                                        >
-                                        <option value="">Sélectionner</option>
-                                        <option value="B.A.F.A">B.A.F.A</option>
-                                        <option value="C.A.P. petite enfance">C.A.P. petite enfance</option>
-                                        <option value="C.Q.P. Périscolaire">C.Q.P. Périscolaire</option>
-                                        <option value="C.P.J.E.P.S. ou B.A.P.A.A.T.">C.P.J.E.P.S. ou B.A.P.A.A.T.</option>
-                                        <option value="B.P.J.E.P.S.">B.P.J.E.P.S.</option>
-                                        <option value="Aucun diplôme pour le moment">Aucun diplôme pour le moment</option>
-                                        </select>
-                                        <button
-                                        className="btn-remove"
-                                        onClick={() => {
-                                            const newDiplomes = candidate.diploma.filter((_, index) => index !== i)
-                                            setCandidate({ ...candidate, diploma: newDiplomes })
-                                        }}
-                                        >
-                                        ⊖
-                                        </button>
-                                    </div>
-                                    ))}
-                                    <button
-                                    className="btn-add"
-                                    onClick={() => {
-                                        const newDiplomes = [...(candidate.diploma || []), ""]
-                                        setCandidate({ ...candidate, diploma: newDiplomes })
-                                    }}
-                                    >
-                                    ⊕
-                                    </button>
-                                </>
+                                {editMode ? (
+                                    <>
+                                        {editData.diploma?.map((d, i) => (
+                                            <div key={i} style={{ display: "flex", alignItems: "center", marginBottom: "4px" }}>
+                                                <select
+                                                    value={d}
+                                                    onChange={e => handleDiplomaChange(i, e.target.value)}
+                                                    style={{ marginRight: "8px" }}
+                                                >
+                                                    {AVAILABLE_DIPLOMAS.map(option => (
+                                                        <option key={option} value={option}>{option}</option>
+                                                    ))}
+                                                </select>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => {
+                                                        const newDiplomas = [...editData.diploma];
+                                                        newDiplomas.splice(i, 1);
+                                                        handleChange('diploma', newDiplomas);
+                                                    }}
+                                                    style={{
+                                                        background: 'red',
+                                                        color: 'white',
+                                                        border: 'none',
+                                                        borderRadius: '4px',
+                                                        cursor: 'pointer',
+                                                        padding: '0 6px',
+                                                        height: '28px'
+                                                    }}
+                                                >
+                                                    x
+                                                </button>
+                                            </div>
+                                        ))}
+                                        <ButtonUI text="+" className="button-secondary" action={handleAddDiploma}/>
+                                    </>
                                 ) : (
-                                candidate.diploma?.map((d, i) => <p key={i}>{d}</p>)
+                                    candidat.diploma?.map((diploma, i) => (
+                                        <BadgeUI text={diploma} key={i} className={"badge-secondary"} />
+                                    ))
                                 )}
                             </div>
                         </div>
                         <div>
                             <p>Expériences avec les enfants :</p>
                             <div>
-                                {candidat.children_experience ? <p>Oui</p> : <p>Non</p>}
-
-                                {candidate.isEditing ? (
-                                    <select
-                                        value={candidate.children_experience ? "Oui" : "Non"}
-                                        onChange={(e) => setCandidate({ ...candidate, children_experience: e.target.value === "Oui" })}
-                                    >
-                                        <option value="Oui">Oui</option>
-                                        <option value="Non">Non</option>
+                                {editMode ? (
+                                    <select value={editData.children_experience ? "Oui" : "Non"} onChange={e => handleChange('children_experience', e.target.value === "Oui")}>
+                                        {EXPERIENCE_OPTIONS.map(opt => <option key={opt} value={opt}>{opt}</option>)}
                                     </select>
-                                    ) : (
-                                    <p>{candidate.children_experience ? "Oui" : "Non"}</p>
+                                ) : (
+                                    <p>{candidat.children_experience ? "Oui" : "Non"}</p>
                                 )}
                             </div>
                         </div>
                         <div className='commentary'>
                             <p>Commentaire :</p>
                             <div>
-                                <p>{candidat.commentary}</p>
-
-                                {candidate.isEditing ? (
-                                    <textarea
-                                        value={candidate.commentary || ""}
-                                        onChange={(e) => setCandidate({ ...candidate, commentary: e.target.value })}
-                                        placeholder="Écris ici tes notes sur le candidat..."
-                                    />
-                                    ) : (
-                                    <div className="comment-display">
-                                        {candidate.commentary || "Aucune note enregistrée."}
-                                    </div>
+                                {editMode ? (
+                                    <textarea value={editData.commentary || ''} onChange={e => handleChange('commentary', e.target.value)} />
+                                ) : (
+                                    <p>{candidat.commentary}</p>
                                 )}
                             </div>
                         </div>
@@ -266,41 +282,28 @@ const ViewInformationsCandidatesTableContainerFeature = forwardRef(({ candidatId
                             </div>
                         </div>
                     </div>
+
                     <div className='footer'>
-
-                        {!candidate.isEditing && (
-                            <div className="edit-actions">
-                                <ButtonUI text={"Planifier un entretien"} className={"button-primary"} action={() => { setOpenScheduleInterviewModal(true); }}/>
-                                <ButtonUI text={"Voir le CV"} className={"button-tertiary"}/>
-                            </div>
-                        )};
-
-                        {candidate.isEditing ? (
-                            <div className="edit-actions">
-                                <ButtonUI text={"Enregistrer"} className={"button-primary"} action={() => { handleSave(true); }}/>
-                                <ButtonUI text={"Annuler"} className={"button-tertiary"} action={() => { handleCancel(true); }}/>
-                            <button className="btn-save" onClick={handleSave}>
-                                Enregistrer
-                            </button>
-                            <button className="btn-cancel" onClick={handleCancel}>
-                                Annuler
-                            </button>
-                            </div>
-                        ) : null}
-
-                        {showPopup && (
-                            <div className="popup-success">
-                                ✅ Modifications de la fiche candidat enregistrées avec succès
-                            </div>
+                        {editMode ? (
+                            <>
+                                <ButtonUI text={"Confirmer"} className={"button-primary"} action={handleSave} />
+                                <ButtonUI text={"Annuler"} className={"button-secondary"} action={handleCancel} />
+                            </>
+                        ) : (
+                            <>
+                                <ButtonUI text={"Planifier un entretien"} className={"button-primary"} action={() => setOpenScheduleInterviewModal(true)} />
+                                <ButtonUI text={"Voir le CV"} className={"button-tertiary"} />
+                            </>
                         )}
-
                     </div>
+
                     <p className='responsible'>Responsable : <span>{candidat.responsible}</span></p>
-                    {openScheduleInterviewModal ? <ScheduleInterviewModal candidatId={candidatId} setOpenScheduleInterviewModal={setOpenScheduleInterviewModal} /> : ''}
+                    {openScheduleInterviewModal && <ScheduleInterviewModal candidatId={candidatId} setOpenScheduleInterviewModal={setOpenScheduleInterviewModal} />}
                 </>
             )}
         </div>
     );
-});
+};
 
 export default ViewInformationsCandidatesTableContainerFeature;
+
