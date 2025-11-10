@@ -1,30 +1,54 @@
 import { useEffect, useState } from 'react';
 import TableContainerFeature from '../../components/features/table-container/container';
 import BadgeUI from '../../components/ui/badge';
-import { supabaseGetCandidates } from '../../services/supabase/supabaseCandidatesDatabase';
+import { supabaseGetCandidates, supabaseUpdateCandidate} from '../../services/supabase/supabaseCandidatesDatabase';
+
+const statusOptions = [
+  "À traiter",
+  "Présent(e)",
+  "Absent(e)"
+];
+
+const decisionOptions = [
+  "En attente", "Éligible", "Non éligible", "Sélectionné(e)"
+];
 
 const InterviewsPage = () => {
   const [candidates, setCandidates] = useState([]);
   const [slice, setSlice] = useState([0, 11]);
-
-  useEffect(() => {
-    supabaseGetCandidates().then((data) => {
-      const transformedData = data.map((candidat) => ({
-        id: candidat.id,
-        interviews_date: candidat.interview_date,
-        interview_time: candidat.interview_time,
-        name: candidat.name.toUpperCase(),
-        firstname: candidat.firstname,
-        job: <BadgeUI text={candidat.job} className={"badge-default"} />,
-        interview_status: <BadgeUI text={candidat.interview_status} className={"badge-primary"} />,
-        interview_decision: <BadgeUI text={candidat.interview_decision} className={"badge-secondary"} />,
-      }));
-      setCandidates(transformedData);
-    });
-  }, [candidates]); // pas de dépendance pour éviter la boucle
-
+  
   const lengthData = candidates.length;
   const paginatedCandidates = candidates.slice(slice[0], slice[1]);
+
+  const loadCandidates = async () => {
+    const data = await supabaseGetCandidates();
+    const transformedData = data.map(candidat => ({
+      id: candidat.id,
+      interviews_date: candidat.interview_date,
+      interview_time: candidat.interview_time,
+      name: candidat.name.toUpperCase(),
+      firstname: candidat.firstname,
+      job: <BadgeUI text={candidat.job} className={"badge-default"} />,
+      interview_status: candidat.interview_status,
+      interview_decision: candidat.interview_decision
+    }));
+    setCandidates(transformedData);
+  };
+
+  useEffect(() => {
+    loadCandidates();
+  }, []);
+
+  const updateInterviewField = async (id, field, value) => {
+    try {
+      await supabaseUpdateCandidate({ id, [field]: value });
+      setCandidates(prev =>
+        prev.map(c => c.id === id ? { ...c, [field]: value } : c)
+      );
+    } catch (error) {
+      console.error(`Erreur lors de la mise à jour de ${field} :`, error);
+    }
+  };
 
   const changeSlice = (direction) => {
     setSlice((prev) => {
@@ -44,6 +68,32 @@ const InterviewsPage = () => {
     });
   };
 
+  const tableData = paginatedCandidates.map(c => ({
+    ...c,
+    interview_status: (
+      <select
+        value={c.interview_status}
+        onChange={(e) => updateInterviewField(c.id, "interview_status", e.target.value)}
+        className="border rounded px-2 py-1"
+      >
+        {statusOptions.map(status => (
+          <option key={status} value={status}>{status}</option>
+        ))}
+      </select>
+    ),
+    interview_decision: (
+      <select
+        value={c.interview_decision}
+        onChange={(e) => updateInterviewField(c.id, "interview_decision", e.target.value)}
+        className="border rounded px-2 py-1"
+      >
+        {decisionOptions.map(decision => (
+          <option key={decision} value={decision}>{decision}</option>
+        ))}
+      </select>
+    ),
+  }));
+
   return (
     <div className="page interviews-page">
       <TableContainerFeature
@@ -58,7 +108,7 @@ const InterviewsPage = () => {
           "Statut d'entretien",
           "Décision",
         ]}
-        data={paginatedCandidates}
+        data={tableData}
         lengthData={lengthData}
         slice={slice}
         changeSlice={changeSlice}

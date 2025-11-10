@@ -14,4 +14,3 @@ const HeaderTableContainerFeature = ({ version }) => {
 };
 
 export default HeaderTableContainerFeature;
-
