@@ -20,3 +20,18 @@ export async function supabaseUpdateUserAuth(user) {
 
     return data;
 }
+
+export async function supabaseAddUserAuth(user) {
+    const { email, password } = user;
+    
+    const { data, error } = await supabase.functions.invoke('addUser', {
+        body: { email: email, password: password },
+    });
+
+    if (error) {
+        console.log(error);
+        throw error;
+    }
+
+    return data;
+}

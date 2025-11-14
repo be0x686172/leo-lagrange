@@ -22,3 +22,15 @@ export async function supabaseUpdateUser(user) {
     if (error) console.error(error);
     return data;
 }
+
+export async function supabaseAddUser(user) {
+    
+    const { id, email } = user;
+
+    let { data, error } = await supabase.from('users')
+    .insert([{ id, email }])
+    .select();
+
+    if (error) console.error(error);
+    return data;
+}
