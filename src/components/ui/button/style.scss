@@ -2,9 +2,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
-    border-radius: 6px;
-    padding: 0px 10px;
+    gap: var(--spacing-xs);
+    border-radius: var(--radius-md);
+    padding: 0 var(--spacing-md);
     cursor: pointer;
 }
 
@@ -13,8 +13,8 @@
     background-color: var(--primary-button-default-background-color);
     border: none;
     outline: none;
-    padding: 8px;
-    border-radius: 5px;
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-sm);
 
     p {
         color: var(--primary-button-default-text-color);
@@ -60,7 +60,7 @@
 
 .button-tertiary {
     border: 1px solid var(--common-neutral-border-color);
-    background-color: var(--common-color-background-color);
+    background-color: var(--common-neutral-background-color-white);
 
     svg {
         stroke-width: 3px;

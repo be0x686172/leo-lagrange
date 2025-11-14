@@ -2,10 +2,10 @@
   display: flex;
   flex-direction: column;
   border-left: 1px solid var(--common-neutral-border-color);
-  padding: 30px 30px 20px;
+  padding: var(--spacing-3xl) var(--spacing-3xl) var(--spacing-2xl);
   width: 100%;
   max-width: 430px;
-  gap: 20px;
+  gap: var(--spacing-2xl);
 
   .no-candidat-id {
     font-size: var(--font-size-s);
@@ -28,14 +28,14 @@
   }
 
   .main {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
 
     .editable-field {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
 
       p {
         font-size: var(--font-size-s);
@@ -43,20 +43,20 @@
       }
 
       .edit-section {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 5px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-xs);
 
-        .option {
+          .option {
           display: flex;
           align-items: center;
-          gap: 4px;
-          padding: 4px 8px;
-          border-radius: 6px;
+          gap: var(--spacing-xs);
+          padding: var(--spacing-xs) var(--spacing-sm);
+          border-radius: var(--radius-md);
           border: 1px solid #ccc;
           cursor: pointer;
-          transition: all 0.2s;
+          transition: all var(--duration-fast) var(--easing-ease-out);
 
           &:hover {
             background-color: #f0f0f0;
@@ -76,8 +76,8 @@
 
       .edit-buttons {
         display: flex;
-        gap: 0.5rem;
-        margin-top: 0.5rem;
+        gap: var(--spacing-md);
+        margin-top: var(--spacing-md);
       }
 
       .input-text,
@@ -85,7 +85,7 @@
       .select-diploma {
         width: 100%;
         padding: 0.4rem;
-        border-radius: 0.4rem;
+        border-radius: var(--radius-sm);
         border: 1px solid #ccc;
       }
 
@@ -97,13 +97,13 @@
   }
 
   .footer {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
 
     .button-ui {
-      flex: 1;
-      padding: 8px;
+    flex: 1;
+    padding: var(--spacing-sm);
 
       p {
         font-size: var(--font-size-s);

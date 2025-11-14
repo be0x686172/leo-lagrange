@@ -57,10 +57,15 @@
             gap: 10px;
 
             label {
-                font-weight: 500;
-                font-size: var(--font-size-s);
+              font-weight: 500;
+              font-size: var(--font-size-s);
             }
         }
+    }
+
+    .datetime-container input[type="date"],
+    .datetime-container input[type="time"] {
+      transition: all var(--duration-fast) var(--easing-ease-out);
     }
 }
 
