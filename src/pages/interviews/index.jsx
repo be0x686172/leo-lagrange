@@ -15,10 +15,12 @@ const decisionOptions = [
 
 const InterviewsPage = () => {
   const [candidates, setCandidates] = useState([]);
+  const [filteredCandidates, setFilteredCandidates] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const [slice, setSlice] = useState([0, 11]);
   
-  const lengthData = candidates.length;
-  const paginatedCandidates = candidates.slice(slice[0], slice[1]);
+  const lengthData = filteredCandidates.length;
+  const paginatedCandidates = filteredCandidates.slice(slice[0], slice[1]);
 
   const loadCandidates = async () => {
     const data = await supabaseGetCandidates();
@@ -33,6 +35,7 @@ const InterviewsPage = () => {
       interview_decision: candidat.interview_decision
     }));
     setCandidates(transformedData);
+    setFilteredCandidates(transformedData);
   };
 
   useEffect(() => {
@@ -66,6 +69,27 @@ const InterviewsPage = () => {
 
       return [start, end];
     });
+  };
+
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+    if (term === '') {
+      setFilteredCandidates(candidates);
+    } else {
+      const filtered = candidates.filter(candidate => {
+        const searchLower = term.toLowerCase();
+        return (
+          (candidate.name && candidate.name.toLowerCase().includes(searchLower)) ||
+          (candidate.firstname && candidate.firstname.toLowerCase().includes(searchLower))
+        );
+      });
+      setFilteredCandidates(filtered);
+    }
+    setSlice([0, 11]);
+  };
+
+  const handleReset = () => {
+    setSlice([0, 11]);
   };
 
   const tableData = paginatedCandidates.map(c => ({
@@ -112,6 +136,9 @@ const InterviewsPage = () => {
         lengthData={lengthData}
         slice={slice}
         changeSlice={changeSlice}
+        searchTerm={searchTerm}
+        onSearchChange={handleSearch}
+        onReset={handleReset}
       />
     </div>
   );

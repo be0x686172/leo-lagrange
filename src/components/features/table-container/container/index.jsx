@@ -4,7 +4,7 @@ import TableTableContainerFeature from '../table';
 import ViewInformationsCandidatesTableContainerFeature from '../view-informations-candidates';
 import { useState } from 'react';
 
-const TableContainerFeature = ({ clickable, version, columns, data, lengthData, slice, changeSlice, searchTerm, onSearchChange }) => {
+const TableContainerFeature = ({ clickable, version, columns, data, lengthData, slice, changeSlice, searchTerm, onSearchChange, onReset }) => {
   const [candidatId, setCandidatId] = useState(null);
 
   return (
@@ -13,6 +13,7 @@ const TableContainerFeature = ({ clickable, version, columns, data, lengthData, 
         version={version}
         searchTerm={searchTerm}
         onSearchChange={onSearchChange}
+        onReset={onReset}
       />
       {version === 'users' ? (
         <TableTableContainerFeature 

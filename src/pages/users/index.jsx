@@ -11,10 +11,12 @@ import EditUserModal from '../../modals/edit-user';
 const UsersPage = () => {
 
     const [users, setUsers] = useState([]);
+    const [filteredUsers, setFilteredUsers] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
     let navigate = useNavigate();
     const [openEditUserModal, setOpenEditUserModal] = useState(false);
     const [userId, setUserId] = useState(null);
-    const lengthData = users.length;
+    const lengthData = filteredUsers.length;
     const [slice, setSlice] = useState([0, lengthData > 10 ? 10 : lengthData]);
     
     useEffect(() => {
@@ -37,13 +39,39 @@ const UsersPage = () => {
                 }));
 
                 setUsers(transformedData);
+                setFilteredUsers(transformedData);
                 setSlice([0, transformedData.length > 10 ? 10 : transformedData.length]);
             } else {
                 setUsers([]);
+                setFilteredUsers([]);
                 setSlice([0, 0]);
             }
         })
-    }, [users, slice]);
+    }, []);
+
+    // Fonction de recherche
+    const handleSearch = (term) => {
+        setSearchTerm(term);
+        if (term === '') {
+            setFilteredUsers(users);
+        } else {
+            const filtered = users.filter(user => {
+                const searchLower = term.toLowerCase();
+                return (
+                    (user.email && user.email.toLowerCase().includes(searchLower)) ||
+                    (user.name && user.name.toLowerCase().includes(searchLower)) ||
+                    (user.firstname && user.firstname.toLowerCase().includes(searchLower))
+                );
+            });
+            setFilteredUsers(filtered);
+        }
+        setSlice([0, 10]);
+    };
+
+    // Fonction de réinitialisation
+    const handleReset = () => {
+        setSlice([0, 10]);
+    };
 
     // Fonction pour changer de tranche
     const changeSlice = (direction) => {
@@ -69,7 +97,18 @@ const UsersPage = () => {
 
     return (
         <div className='page users-page'>
-            <TableContainerFeature clickable={false} version={"users"} columns={["E-mail", "Nom", "Prénom", "Statut", "Accès candidats", "Accès entretiens", "Action"]} data={users} lengthData={Object.keys(users).length} slice={slice} changeSlice={changeSlice} />
+            <TableContainerFeature 
+                clickable={false} 
+                version={"users"} 
+                columns={["E-mail", "Nom", "Prénom", "Statut", "Accès candidats", "Accès entretiens", "Action"]} 
+                data={filteredUsers} 
+                lengthData={filteredUsers.length} 
+                slice={slice} 
+                changeSlice={changeSlice}
+                searchTerm={searchTerm}
+                onSearchChange={handleSearch}
+                onReset={handleReset}
+            />
             {openEditUserModal ? <EditUserModal userId={userId} setOpenEditUserModal={setOpenEditUserModal} /> : ''}
         </div>
     );

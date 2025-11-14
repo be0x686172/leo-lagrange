@@ -27,6 +27,8 @@ const statusOptions = [
 
 const CandidatesPage = () => {
   const [candidates, setCandidates] = useState([]);
+  const [filteredCandidates, setFilteredCandidates] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const [slice, setSlice] = useState([0, 11]);
   const [loading, setLoading] = useState(true);
 
@@ -49,6 +51,7 @@ const CandidatesPage = () => {
       application_status: candidat.application_status,
     }));
     setCandidates(transformedData);
+    setFilteredCandidates(transformedData);
     setLoading(false);
   };
 
@@ -67,8 +70,8 @@ const CandidatesPage = () => {
     }
   };
 
-  const lengthData = candidates.length;
-  const paginatedCandidates = candidates.slice(slice[0], slice[1]);
+  const lengthData = filteredCandidates.length;
+  const paginatedCandidates = filteredCandidates.slice(slice[0], slice[1]);
 
   const changeSlice = (direction) => {
     setSlice(prev => {
@@ -78,6 +81,27 @@ const CandidatesPage = () => {
       if (end > lengthData) { end = lengthData; start = Math.max(lengthData - 11, 0); }
       return [start, end];
     });
+  };
+
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+    if (term === '') {
+      setFilteredCandidates(candidates);
+    } else {
+      const filtered = candidates.filter(candidate => {
+        const searchLower = term.toLowerCase();
+        return (
+          (candidate.name && candidate.name.toLowerCase().includes(searchLower)) ||
+          (candidate.firstname && candidate.firstname.toLowerCase().includes(searchLower))
+        );
+      });
+      setFilteredCandidates(filtered);
+    }
+    setSlice([0, 11]);
+  };
+
+  const handleReset = () => {
+    setSlice([0, 11]);
   };
 
   const tableData = paginatedCandidates.map(c => ({
@@ -113,6 +137,9 @@ const CandidatesPage = () => {
           lengthData={lengthData}
           slice={slice}
           changeSlice={changeSlice}
+          searchTerm={searchTerm}
+          onSearchChange={handleSearch}
+          onReset={handleReset}
         />
       )}
     </div>
