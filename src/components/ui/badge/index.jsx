@@ -1,10 +1,19 @@
 import './style.scss';
 
-const BadgeUI = ({text, className}) => {
+const BadgeUI = ({ text, className = '', style: styleProp = {}, color }) => {
+    const inlineStyle = color
+        ? {
+              backgroundColor: color.background,
+              color: color.color,
+              borderColor: color.border || 'transparent',
+              ...styleProp,
+          }
+        : styleProp;
+
     return (
-        <div className={`badge-ui ${className}`}>
+        <button type="button" className={`badge-ui ${className}`} style={inlineStyle} aria-label={`poste ${text}`}>
             <p>{text}</p>
-        </div>
+        </button>
     );
 };
 

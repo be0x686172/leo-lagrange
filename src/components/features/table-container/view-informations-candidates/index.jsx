@@ -2,6 +2,7 @@ import './style.scss';
 import { useEffect, useState } from 'react';
 import BadgeUI from '../../../ui/badge';
 import ButtonUI from '../../../ui/button';
+import SelectUI from '../../../ui/select';
 import { supabaseGetCandidateById } from '../../../../services/supabase/supabaseCandidatesDatabase';
 import { supabaseUpdateCandidate } from '../../../../services/supabase/supabaseCandidatesDatabase';
 import ScheduleInterviewModal from '../../../../modals/schedule_interview';
@@ -112,7 +113,7 @@ const ViewInformationsCandidatesTableContainerFeature = ({ candidatId }) => {
                     <div className='main'>
                         <div>
                             <p>Horaires</p>
-                            <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+                            <div className="tags-container">
                                 {AVAILABLE_HOURS.map((hours, i) => {
                                 const isSelected = editMode
                                     ? editData.working_hours?.includes(hours)
@@ -130,29 +131,21 @@ const ViewInformationsCandidatesTableContainerFeature = ({ candidatId }) => {
                                 };
 
                                 return (
-                                    <span
-                                    key={i}
-                                    onClick={handleClick}
-                                    className={isSelected ? "badge-selected" : "badge-default"}
-                                    style={{
-                                        cursor: editMode ? "pointer" : "default",
-                                        userSelect: "none",
-                                        padding: "4px 8px",
-                                        borderRadius: "4px",
-                                        backgroundColor: isSelected ? "#f44336" : "#e0e0e0",
-                                        color: isSelected ? "white" : "black",
-                                        transition: "all 0.2s",
-                                    }}
-                                    >
-                                    {hours}
-                                    </span>
+                                    <BadgeUI
+                                        key={i}
+                                        text={hours}
+                                        className={isSelected ? 'badge-selected' : 'badge-default'}
+                                        color={isSelected ? { background: 'var(--common-interactive-color-primary)', color: '#fff' } : undefined}
+                                        style={{ cursor: editMode ? 'pointer' : 'default', userSelect: 'none' }}
+                                        onClick={editMode ? handleClick : undefined}
+                                    />
                                 );
                                 })}
                             </div>
                         </div>
                         <div>
                             <p>Arrondissements</p>
-                            <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+                            <div className="tags-container">
                             {AVAILABLE_DISTRICTS.map((district, i) => {
                             const selectedDistricts = editMode ? editData.districts || [] : candidat.districts || [];
                             const isSelected = selectedDistricts.includes(district);
@@ -167,22 +160,14 @@ const ViewInformationsCandidatesTableContainerFeature = ({ candidatId }) => {
                             };
 
                             return (
-                                <span
-                                key={i}
-                                onClick={handleClick}
-                                className={isSelected ? "badge-selected" : "badge-default"}
-                                style={{
-                                    cursor: editMode ? "pointer" : "default",
-                                    userSelect: "none",
-                                    padding: "4px 8px",
-                                    borderRadius: "4px",
-                                    backgroundColor: isSelected ? "#f44336" : "#e0e0e0",
-                                    color: isSelected ? "white" : "black",
-                                    transition: "all 0.2s",
-                                }}
-                                >
-                                {district}e
-                                </span>
+                                <BadgeUI
+                                  key={i}
+                                  text={`${district}e`}
+                                  className={isSelected ? 'badge-selected' : 'badge-default'}
+                                  color={isSelected ? { background: 'var(--common-interactive-color-primary)', color: '#fff' } : undefined}
+                                  style={{ cursor: editMode ? 'pointer' : 'default', userSelect: 'none' }}
+                                  onClick={editMode ? handleClick : undefined}
+                                />
                             );
                             })}
                         </div>
@@ -212,39 +197,22 @@ const ViewInformationsCandidatesTableContainerFeature = ({ candidatId }) => {
                             <div>
                                 {editMode ? (
                                     <>
-                                        {editData.diploma?.map((d, i) => (
-                                            <div key={i} style={{ display: "flex", alignItems: "center", marginBottom: "4px" }}>
-                                                <select
-                                                    value={d}
-                                                    onChange={e => handleDiplomaChange(i, e.target.value)}
-                                                    style={{ marginRight: "8px" }}
-                                                >
-                                                    {AVAILABLE_DIPLOMAS.map(option => (
-                                                        <option key={option} value={option}>{option}</option>
-                                                    ))}
-                                                </select>
-                                                <button
-                                                    type="button"
-                                                    onClick={() => {
-                                                        const newDiplomas = [...editData.diploma];
-                                                        newDiplomas.splice(i, 1);
-                                                        handleChange('diploma', newDiplomas);
-                                                    }}
-                                                    style={{
-                                                        background: 'red',
-                                                        color: 'white',
-                                                        border: 'none',
-                                                        borderRadius: '4px',
-                                                        cursor: 'pointer',
-                                                        padding: '0 6px',
-                                                        height: '28px'
-                                                    }}
-                                                >
-                                                    x
-                                                </button>
-                                            </div>
-                                        ))}
-                                        <ButtonUI text="+" className="button-secondary" action={handleAddDiploma}/>
+                                                {editData.diploma?.map((d, i) => (
+                                                    <div key={i} className="diploma-row">
+                                                        <SelectUI
+                                                            value={d}
+                                                            options={AVAILABLE_DIPLOMAS}
+                                                            onValueChange={(v) => handleDiplomaChange(i, v)}
+                                                            compact={true}
+                                                        />
+                                                        <ButtonUI text={'Supprimer'} className={'button-tertiary'} action={() => {
+                                                            const newDiplomas = [...editData.diploma];
+                                                            newDiplomas.splice(i, 1);
+                                                            handleChange('diploma', newDiplomas);
+                                                        }} />
+                                                    </div>
+                                                ))}
+                                                <ButtonUI text="Ajouter diplôme" className="button-secondary" action={handleAddDiploma}/>
                                     </>
                                 ) : (
                                     candidat.diploma?.map((diploma, i) => (

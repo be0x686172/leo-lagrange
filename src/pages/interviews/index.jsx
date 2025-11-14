@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import TableContainerFeature from '../../components/features/table-container/container';
 import BadgeUI from '../../components/ui/badge';
+import SelectUI from '../../components/ui/select';
+import { getPosteColor } from '../../constants/colors';
 import { supabaseGetCandidates, supabaseUpdateCandidate} from '../../services/supabase/supabaseCandidatesDatabase';
 
 const statusOptions = [
@@ -37,7 +39,7 @@ const InterviewsPage = () => {
       interview_time: candidat.interview_time,
       name: candidat.name.toUpperCase(),
       firstname: candidat.firstname,
-      job: <BadgeUI text={candidat.job} className={"badge-default"} />,
+      job: <BadgeUI text={candidat.job} className={"badge-default"} color={getPosteColor(candidat.job)} />,
       interview_status: candidat.interview_status,
       interview_decision: candidat.interview_decision
     }));
@@ -124,26 +126,22 @@ const InterviewsPage = () => {
   const tableData = paginatedCandidates.map(c => ({
     ...c,
     interview_status: (
-      <select
+      <SelectUI
         value={c.interview_status}
-        onChange={(e) => updateInterviewField(c.id, "interview_status", e.target.value)}
-        className="border rounded px-2 py-1"
-      >
-        {statusOptions.map(status => (
-          <option key={status} value={status}>{status}</option>
-        ))}
-      </select>
+        options={statusOptions}
+        onValueChange={(v) => updateInterviewField(c.id, "interview_status", v)}
+        className={'table-select'}
+        compact={true}
+      />
     ),
     interview_decision: (
-      <select
+      <SelectUI
         value={c.interview_decision}
-        onChange={(e) => updateInterviewField(c.id, "interview_decision", e.target.value)}
-        className="border rounded px-2 py-1"
-      >
-        {decisionOptions.map(decision => (
-          <option key={decision} value={decision}>{decision}</option>
-        ))}
-      </select>
+        options={decisionOptions}
+        onValueChange={(v) => updateInterviewField(c.id, "interview_decision", v)}
+        className={'table-select'}
+        compact={true}
+      />
     ),
   }));
 

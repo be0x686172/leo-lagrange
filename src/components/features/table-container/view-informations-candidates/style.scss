@@ -30,7 +30,7 @@
   .main {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
+    gap: var(--spacing-lg);
 
     .editable-field {
     display: flex;
@@ -99,7 +99,7 @@
   .footer {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+    gap: var(--spacing-md);
 
     .button-ui {
     flex: 1;
@@ -121,6 +121,41 @@
       font-weight: 500;
     }
   }
+}
+
+.tags-container {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.badge-default {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  background-color: #e6e6e6;
+  color: #111;
+  cursor: default;
+}
+
+.badge-selected {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  background-color: var(--common-interactive-color-primary);
+  color: #fff;
+  cursor: pointer;
+}
+
+.diploma-row {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
 }
 
 .view-informations-candidates-table-container-feature-center {
