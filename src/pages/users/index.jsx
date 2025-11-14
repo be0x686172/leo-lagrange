@@ -13,6 +13,10 @@ const UsersPage = () => {
     const [users, setUsers] = useState([]);
     const [filteredUsers, setFilteredUsers] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [filters, setFilters] = useState({
+        candidates_access: '',
+        interviews_access: ''
+    });
     let navigate = useNavigate();
     const [openEditUserModal, setOpenEditUserModal] = useState(false);
     const [userId, setUserId] = useState(null);
@@ -49,13 +53,44 @@ const UsersPage = () => {
         })
     }, []);
 
-    // Fonction de recherche
+    // Fonction de recherche et filtrage
     const handleSearch = (term) => {
         setSearchTerm(term);
+        applyFilters(term, filters);
+        setSlice([0, 10]);
+    };
+
+    // Fonction de filtre
+    const handleFiltersChange = (newFilters) => {
+        setFilters(newFilters);
+        applyFilters(searchTerm, newFilters);
+        setSlice([0, 10]);
+    };
+
+    // Applique la recherche et les filtres
+    const applyFilters = (term, activeFilters) => {
+        let result = users;
+
+        // Appliquer les filtres
+        if (activeFilters.candidates_access) {
+            result = result.filter(user => {
+                const hasAccess = activeFilters.candidates_access === 'yes' ? user.candidates_access : !user.candidates_access;
+                return hasAccess;
+            });
+        }
+
+        if (activeFilters.interviews_access) {
+            result = result.filter(user => {
+                const hasAccess = activeFilters.interviews_access === 'yes' ? user.interviews_access : !user.interviews_access;
+                return hasAccess;
+            });
+        }
+
+        // Appliquer la recherche
         if (term === '') {
-            setFilteredUsers(users);
+            setFilteredUsers(result);
         } else {
-            const filtered = users.filter(user => {
+            const filtered = result.filter(user => {
                 const searchLower = term.toLowerCase();
                 return (
                     (user.email && user.email.toLowerCase().includes(searchLower)) ||
@@ -65,7 +100,6 @@ const UsersPage = () => {
             });
             setFilteredUsers(filtered);
         }
-        setSlice([0, 10]);
     };
 
     // Fonction de réinitialisation
@@ -108,6 +142,8 @@ const UsersPage = () => {
                 searchTerm={searchTerm}
                 onSearchChange={handleSearch}
                 onReset={handleReset}
+                filters={filters}
+                onFiltersChange={handleFiltersChange}
             />
             {openEditUserModal ? <EditUserModal userId={userId} setOpenEditUserModal={setOpenEditUserModal} /> : ''}
         </div>

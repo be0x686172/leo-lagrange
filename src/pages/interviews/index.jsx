@@ -17,6 +17,10 @@ const InterviewsPage = () => {
   const [candidates, setCandidates] = useState([]);
   const [filteredCandidates, setFilteredCandidates] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [filters, setFilters] = useState({
+    interview_status: '',
+    interview_decision: ''
+  });
   const [slice, setSlice] = useState([0, 11]);
   
   const lengthData = filteredCandidates.length;
@@ -76,10 +80,33 @@ const InterviewsPage = () => {
 
   const handleSearch = (term) => {
     setSearchTerm(term);
+    applyFilters(term, filters);
+    setSlice([0, 11]);
+  };
+
+  const handleFiltersChange = (newFilters) => {
+    setFilters(newFilters);
+    applyFilters(searchTerm, newFilters);
+    setSlice([0, 11]);
+  };
+
+  const applyFilters = (term, activeFilters) => {
+    let result = candidates;
+
+    // Appliquer les filtres
+    if (activeFilters.interview_status) {
+      result = result.filter(candidate => candidate.interview_status === activeFilters.interview_status);
+    }
+
+    if (activeFilters.interview_decision) {
+      result = result.filter(candidate => candidate.interview_decision === activeFilters.interview_decision);
+    }
+
+    // Appliquer la recherche
     if (term === '') {
-      setFilteredCandidates(candidates);
+      setFilteredCandidates(result);
     } else {
-      const filtered = candidates.filter(candidate => {
+      const filtered = result.filter(candidate => {
         const searchLower = term.toLowerCase();
         return (
           (candidate.name && candidate.name.toLowerCase().includes(searchLower)) ||
@@ -88,7 +115,6 @@ const InterviewsPage = () => {
       });
       setFilteredCandidates(filtered);
     }
-    setSlice([0, 11]);
   };
 
   const handleReset = () => {
@@ -142,6 +168,8 @@ const InterviewsPage = () => {
         searchTerm={searchTerm}
         onSearchChange={handleSearch}
         onReset={handleReset}
+        filters={filters}
+        onFiltersChange={handleFiltersChange}
       />
     </div>
   );

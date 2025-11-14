@@ -1,0 +1,156 @@
+.filters-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+    animation: fadeIn 0.2s ease-out forwards;
+}
+
+.filters-modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 380px;
+    background-color: var(--common-neutral-background-color-white);
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    animation: slideInRight 0.3s ease-out forwards;
+    z-index: 1000;
+
+    .filters-modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 24px;
+        border-bottom: 1px solid var(--common-neutral-border-color);
+
+        h2 {
+            margin: 0;
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            color: var(--common-neutral-text-color-primary);
+        }
+
+        .close-icon {
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+            color: var(--common-neutral-text-color-tertiary);
+            transition: color 0.2s ease;
+
+            &:hover {
+                color: var(--common-neutral-text-color-primary);
+            }
+        }
+    }
+
+    .filters-modal-content {
+        flex: 1;
+        overflow-y: auto;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+
+            label {
+                font-size: var(--font-size-m);
+                font-weight: 600;
+                color: var(--common-neutral-text-color-primary);
+            }
+
+            .filter-options {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                padding-left: 8px;
+
+                .checkbox-label {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    cursor: pointer;
+                    font-size: var(--font-size-m);
+                    color: var(--common-neutral-text-color-secondary);
+                    transition: color 0.2s ease;
+
+                    input[type='checkbox'] {
+                        width: 18px;
+                        height: 18px;
+                        cursor: pointer;
+                        accent-color: var(--common-interactive-color-primary);
+                        border-radius: 4px;
+                        border: 2px solid var(--common-neutral-border-color);
+                        transition: all 0.2s ease;
+
+                        &:hover {
+                            border-color: var(--common-interactive-color-primary);
+                        }
+
+                        &:checked {
+                            background-color: var(--common-interactive-color-primary);
+                            border-color: var(--common-interactive-color-primary);
+                        }
+                    }
+
+                    &:hover {
+                        color: var(--common-neutral-text-color-primary);
+                    }
+                }
+            }
+        }
+    }
+
+    .filters-modal-footer {
+        display: flex;
+        gap: 12px;
+        padding: 24px;
+        border-top: 1px solid var(--common-neutral-border-color);
+        background-color: var(--common-neutral-background-color-secondary);
+
+        button {
+            flex: 1;
+
+            p {
+                font-size: var(--font-size-m);
+            }
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .filters-modal {
+        width: 100%;
+        max-width: 380px;
+    }
+}

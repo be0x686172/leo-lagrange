@@ -29,6 +29,9 @@ const CandidatesPage = () => {
   const [candidates, setCandidates] = useState([]);
   const [filteredCandidates, setFilteredCandidates] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [filters, setFilters] = useState({
+    application_status: ''
+  });
   const [slice, setSlice] = useState([0, 11]);
   const [loading, setLoading] = useState(true);
 
@@ -88,10 +91,29 @@ const CandidatesPage = () => {
 
   const handleSearch = (term) => {
     setSearchTerm(term);
+    applyFilters(term, filters);
+    setSlice([0, 11]);
+  };
+
+  const handleFiltersChange = (newFilters) => {
+    setFilters(newFilters);
+    applyFilters(searchTerm, newFilters);
+    setSlice([0, 11]);
+  };
+
+  const applyFilters = (term, activeFilters) => {
+    let result = candidates;
+
+    // Appliquer les filtres
+    if (activeFilters.application_status) {
+      result = result.filter(candidate => candidate.application_status === activeFilters.application_status);
+    }
+
+    // Appliquer la recherche
     if (term === '') {
-      setFilteredCandidates(candidates);
+      setFilteredCandidates(result);
     } else {
-      const filtered = candidates.filter(candidate => {
+      const filtered = result.filter(candidate => {
         const searchLower = term.toLowerCase();
         return (
           (candidate.name && candidate.name.toLowerCase().includes(searchLower)) ||
@@ -100,7 +122,6 @@ const CandidatesPage = () => {
       });
       setFilteredCandidates(filtered);
     }
-    setSlice([0, 11]);
   };
 
   const handleReset = () => {
@@ -143,6 +164,8 @@ const CandidatesPage = () => {
           searchTerm={searchTerm}
           onSearchChange={handleSearch}
           onReset={handleReset}
+          filters={filters}
+          onFiltersChange={handleFiltersChange}
         />
       )}
     </div>

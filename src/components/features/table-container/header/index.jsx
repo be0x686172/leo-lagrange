@@ -3,9 +3,11 @@ import { useState } from 'react';
 import TextInputWithIconUI from '../../../ui/text-input-with-icon';
 import ButtonUI from '../../../ui/button';
 import AddUserModal from '../../../../modals/add-user';
+import FiltersModal from '../../../../modals/filters';
 
-const HeaderTableContainerFeature = ({ version, searchTerm, onSearchChange, onReset }) => {
+const HeaderTableContainerFeature = ({ version, searchTerm, onSearchChange, onReset, filters, onFiltersChange }) => {
     const [openAddUserModal, setOpenAddUserModal] = useState(false);
+    const [openFiltersModal, setOpenFiltersModal] = useState(false);
 
     const handleResetClick = () => {
         onSearchChange('');
@@ -19,10 +21,17 @@ const HeaderTableContainerFeature = ({ version, searchTerm, onSearchChange, onRe
                 value={searchTerm}
                 onChange={(e) => onSearchChange(e.target.value)}
             />
-            {/* <ButtonUI icon={"ListFilter"} text={"Filtres"} className={"button-tertiary"} /> */}
+            <ButtonUI icon={"ListFilter"} text={"Filtres"} className={"button-tertiary"} action={() => setOpenFiltersModal(true)} />
             <ButtonUI text={"Réinitialiser"} className={"button-tertiary"} action={handleResetClick} />
             {version == "users" ? <ButtonUI icon={"CirclePlus"} text={"Ajouter un utilisateur"} className={"button-secondary"} action={() => setOpenAddUserModal(true)} /> : ''}
             {openAddUserModal && <AddUserModal setOpenAddUserModal={setOpenAddUserModal} />}
+            <FiltersModal 
+                version={version}
+                isOpen={openFiltersModal}
+                onClose={() => setOpenFiltersModal(false)}
+                filters={filters}
+                onFiltersChange={onFiltersChange}
+            />
         </div>
     );
 };
