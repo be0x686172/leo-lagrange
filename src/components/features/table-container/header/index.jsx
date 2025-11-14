@@ -16,7 +16,9 @@ const HeaderTableContainerFeature = ({ version, searchTerm, onSearchChange, filt
                 value={searchTerm}
                 onChange={(e) => onSearchChange(e.target.value)}
             />
-            <ButtonUI icon={"ListFilter"} text={"Filtres"} className={"button-tertiary"} action={() => setOpenFiltersModal(true)} />
+            {(version === 'candidates' || version === 'interviews') && (
+                <ButtonUI icon={"ListFilter"} text={"Filtres"} className={"button-tertiary"} action={() => setOpenFiltersModal(true)} />
+            )}
             {version == "users" ? <ButtonUI icon={"CirclePlus"} text={"Ajouter un utilisateur"} className={"button-secondary"} action={() => setOpenAddUserModal(true)} /> : ''}
             {openAddUserModal && <AddUserModal setOpenAddUserModal={setOpenAddUserModal} />}
             <FiltersModal 
