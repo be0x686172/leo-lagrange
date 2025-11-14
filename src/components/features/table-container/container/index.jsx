@@ -17,31 +17,37 @@ const TableContainerFeature = ({ clickable, version, columns, data, lengthData, 
         filters={filters}
         onFiltersChange={onFiltersChange}
       />
+      <div className="table-section">
       {version === 'users' ? (
-        <TableTableContainerFeature 
-          clickable={clickable}
-          columns={columns}
-          data={data}
-          version={version}
-          lengthData={lengthData}
-          slice={slice}
-          changeSlice={changeSlice}
-        />
-      ) : (
-        <div>
+        <div className="table-responsive">
           <TableTableContainerFeature 
             clickable={clickable}
             columns={columns}
             data={data}
             version={version}
             lengthData={lengthData}
-            setCandidatId={setCandidatId}
             slice={slice}
             changeSlice={changeSlice}
           />
+        </div>
+      ) : (
+        <div className="table-and-detail">
+          <div className="table-responsive">
+            <TableTableContainerFeature 
+              clickable={clickable}
+              columns={columns}
+              data={data}
+              version={version}
+              lengthData={lengthData}
+              setCandidatId={setCandidatId}
+              slice={slice}
+              changeSlice={changeSlice}
+            />
+          </div>
           <ViewInformationsCandidatesTableContainerFeature candidatId={candidatId} />
         </div>
       )}
+      </div>
     </div>
   );
 };

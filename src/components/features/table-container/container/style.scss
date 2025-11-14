@@ -3,7 +3,40 @@
     border: 1px solid var(--common-neutral-border-color);
     border-radius: 5px;
 
-    & > div {
+    & > .table-section {
         display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .table-and-detail {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+
+        .table-responsive {
+            flex: 1 1 auto;
+        }
+
+        > :last-child {
+            flex: 0 0 430px;
+        }
+    }
+
+    .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    @media (max-width: 768px) {
+        .table-and-detail {
+            flex-direction: column;
+        }
+
+        .table-and-detail > :last-child {
+            flex: 0 0 auto;
+            width: 100%;
+            border-left: none;
+        }
     }
 }

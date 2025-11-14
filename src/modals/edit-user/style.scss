@@ -8,6 +8,9 @@
     border: 1px solid var(--common-neutral-border-color);
     border-radius: 7px;
     animation: slideIn 0.17s ease-out forwards;
+    z-index: 1001;
+    max-width: 720px;
+    width: calc(100% - 48px);
 
     & > div {
         position: relative;

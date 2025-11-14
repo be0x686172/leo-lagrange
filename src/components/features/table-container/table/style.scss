@@ -1,6 +1,8 @@
 .table-table-container-feature {
     width: 100%;
     border-collapse: collapse;
+    display: table;
+    min-width: 720px; // allow horizontal scroll on small screens
 
     thead {
         th {
@@ -94,4 +96,16 @@
 
 .fixed {
     table-layout: fixed;
+}
+
+@media (max-width: 768px) {
+    .table-table-container-feature {
+        min-width: 600px;
+        font-size: var(--font-size-s);
+    }
+
+    .table-table-container-feature thead th,
+    .table-table-container-feature tbody td {
+        padding: 10px;
+    }
 }

@@ -5,14 +5,9 @@ import ButtonUI from '../../../ui/button';
 import AddUserModal from '../../../../modals/add-user';
 import FiltersModal from '../../../../modals/filters';
 
-const HeaderTableContainerFeature = ({ version, searchTerm, onSearchChange, onReset, filters, onFiltersChange }) => {
+const HeaderTableContainerFeature = ({ version, searchTerm, onSearchChange, filters, onFiltersChange }) => {
     const [openAddUserModal, setOpenAddUserModal] = useState(false);
     const [openFiltersModal, setOpenFiltersModal] = useState(false);
-
-    const handleResetClick = () => {
-        onSearchChange('');
-        if (onReset) onReset();
-    };
 
     return (
         <div className='header-table-container-feature'>

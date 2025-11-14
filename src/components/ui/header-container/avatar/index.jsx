@@ -17,7 +17,7 @@ const AvatarUI = ({ openHeader }) => {
                 }
             });
         })
-    }, [user])
+    }, [])
 
     return (
         <div className='avatar-ui'>

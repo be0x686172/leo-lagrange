@@ -3,7 +3,8 @@
   flex-direction: column;
   border-left: 1px solid var(--common-neutral-border-color);
   padding: 30px 30px 20px;
-  width: 430px;
+  width: 100%;
+  max-width: 430px;
   gap: 20px;
 
   .no-candidat-id {
@@ -124,4 +125,13 @@
 
 .view-informations-candidates-table-container-feature-center {
   justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .view-informations-candidates-table-container-feature {
+    border-left: none;
+    padding: 18px;
+    max-width: 100%;
+    width: 100%;
+  }
 }

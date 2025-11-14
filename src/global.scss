@@ -7,14 +7,25 @@
         // Common
             // Neutral
             --common-neutral-text-color: #0A0A0A;
+            --common-neutral-text-color-primary: #0A0A0A;
+            --common-neutral-text-color-secondary: #404040;
+            --common-neutral-text-color-tertiary: #737373;
             --common-neutral-border-color: #D4D4D4;
+            --common-neutral-border-color-hover: #B3B3B3;
             --common-neutral-background-color: #FAFAFA;
             --common-neutral-background-color-white: #fff;
+            --common-neutral-background-color-secondary: #F5F5F5;
             --common-neutral-hover-background-color: #FFF1F1;
             --common-neutral-active-background-color: #FFF1F1;
 
             // Common primary
             --common-primary-medium-color: #FF2627;
+
+            // Interactive
+            --common-interactive-color-primary: #3B82F6;
+            --common-interactive-color-success: #10B981;
+            --common-interactive-color-danger: #EF4444;
+            --common-interactive-color-warning: #F59E0B;
 
         // Text
         --text-color-warning: #FF2627;
@@ -34,7 +45,7 @@
             --primary-button-disable-text-color: #FAFAFA;
             --primary-button-disable-background-color: #FFA2A2;
             // Secondary
-            --sedondary-button-default-text-color: #FF2627;
+            --secondary-button-default-text-color: #FF2627;
             --secondary-button-default-background-color: #FAFAFA;
             --secondary-button-default-border-color: #FFDFDF;
             --secondary-button-hover-text-color: #4B0404;
@@ -72,6 +83,11 @@
             --badge-default-background-color: #F5F5F5;
             --badge-default-text-color: #404040;
             --badge-default-border-color: #D4D4D4;
+
+            // Primary False
+            --badge-primary-false-background-color: #FEE2E2;
+            --badge-primary-false-text-color: #991B1B;
+            --badge-primary-false-border-color: #FECACA;
     
     // Font Size
         // Heading
@@ -83,10 +99,88 @@
         --font-size-2xl: 24px;
         --font-size-xl: 20px;
         --font-size-l: 18px;
+        --font-size-m: 16px;
         --font-size-default: 16px;
         --font-size-s: 14px;
         --font-size-xs: 12px;
         --font-size-2xs: 10px;
+
+    // Spacing (8px base system)
+        --spacing-xs: 4px;
+        --spacing-sm: 8px;
+        --spacing-md: 12px;
+        --spacing-lg: 16px;
+        --spacing-xl: 20px;
+        --spacing-2xl: 24px;
+        --spacing-3xl: 32px;
+        --spacing-4xl: 40px;
+
+    // Border Radius
+        --radius-sm: 4px;
+        --radius-md: 6px;
+        --radius-lg: 8px;
+        --radius-xl: 12px;
+
+    // Shadows
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+        --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+
+    // Transitions
+        --duration-fast: 150ms;
+        --duration-normal: 300ms;
+        --duration-slow: 500ms;
+        --easing-ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+    // Breakpoints
+        --breakpoint-sm: 640px; // phones
+        --breakpoint-md: 768px; // tablets
+        --breakpoint-lg: 1024px; // small laptops
+
+}
+
+/* Utility classes and helpers for responsive behavior */
+@media (max-width: 1024px) {
+    .modal-responsive {
+        max-width: 720px;
+        width: calc(100% - 48px);
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        padding: 20px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .modal-responsive {
+        max-width: 92vw;
+        width: 92vw;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        padding: 14px !important;
+        border-radius: 8px;
+    }
+
+    .container-fluid {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+}
+
+/* Make tables horizontally scrollable on small screens */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Reduce text sizes a bit on very small screens */
+@media (max-width: 420px) {
+    :root {
+        --font-size-s: 13px;
+        --font-size-xs: 11px;
+        --font-size-m: 14px;
+    }
 }
 
 * {
