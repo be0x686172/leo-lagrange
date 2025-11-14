@@ -35,7 +35,10 @@ const CandidatesPage = () => {
   const loadCandidates = async () => {
     setLoading(true);
     const data = await supabaseGetCandidates();
-    const transformedData = data.map((candidat) => ({
+    // Filtrer les candidats SANS date d'entretien
+    const candidatesWithoutInterview = data.filter(candidat => !candidat.interview_date);
+    
+    const transformedData = candidatesWithoutInterview.map((candidat) => ({
       id: candidat.id,
       "⏳": <Hourglass color="#c4c4c4ff" size={19} />,
       interviews_date: candidat.application_date,

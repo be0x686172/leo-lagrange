@@ -24,7 +24,10 @@ const InterviewsPage = () => {
 
   const loadCandidates = async () => {
     const data = await supabaseGetCandidates();
-    const transformedData = data.map(candidat => ({
+    // Filtrer les candidats AVEC une date d'entretien
+    const candidatesWithInterview = data.filter(candidat => candidat.interview_date);
+    
+    const transformedData = candidatesWithInterview.map(candidat => ({
       id: candidat.id,
       interviews_date: candidat.interview_date,
       interview_time: candidat.interview_time,
