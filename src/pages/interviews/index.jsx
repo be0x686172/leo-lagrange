@@ -4,6 +4,7 @@ import BadgeUI from '../../components/ui/badge';
 import SelectUI from '../../components/ui/select';
 import { getPosteColor } from '../../constants/colors';
 import { supabaseGetCandidates, supabaseUpdateCandidate} from '../../services/supabase/supabaseCandidatesDatabase';
+import { supabase } from '../../services/supabase/supabaseClient';
 
 const statusOptions = [
   "À traiter",
@@ -32,31 +33,66 @@ const InterviewsPage = () => {
     const data = await supabaseGetCandidates();
     // Filtrer les candidats AVEC une date d'entretien
     const candidatesWithInterview = data.filter(candidat => candidat.interview_date);
-    
-    const transformedData = candidatesWithInterview.map(candidat => ({
+
+    const transform = (candidat) => ({
       id: candidat.id,
       interviews_date: candidat.interview_date,
       interview_time: candidat.interview_time,
-      name: candidat.name.toUpperCase(),
+      name: candidat.name ? candidat.name.toUpperCase() : '-',
       firstname: candidat.firstname,
       job: <BadgeUI text={candidat.job} className={"badge-default"} color={getPosteColor(candidat.job)} />,
       interview_status: candidat.interview_status,
       interview_decision: candidat.interview_decision
-    }));
+    });
+
+    const transformedData = candidatesWithInterview.map(transform);
     setCandidates(transformedData);
     setFilteredCandidates(transformedData);
   };
 
   useEffect(() => {
     loadCandidates();
+
+    const channel = supabase
+      .channel('public:candidates')
+      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'candidates' }, (payload) => {
+        const updated = payload.new;
+        setCandidates(prev => prev.map(item => {
+          if (item.id !== updated.id) return item;
+          return {
+            ...item,
+            interviews_date: updated.interview_date || updated.application_date,
+            interview_time: updated.interview_time,
+            name: updated.name ? updated.name.toUpperCase() : item.name,
+            firstname: updated.firstname,
+            job: <BadgeUI text={updated.job} className={"badge-default"} color={getPosteColor(updated.job)} />,
+            interview_status: updated.interview_status,
+            interview_decision: updated.interview_decision,
+          };
+        }));
+        setFilteredCandidates(prev => prev.map(item => item.id === updated.id ? ({
+          ...item,
+          interviews_date: updated.interview_date || updated.application_date,
+          interview_time: updated.interview_time,
+          name: updated.name ? updated.name.toUpperCase() : item.name,
+          firstname: updated.firstname,
+          job: <BadgeUI text={updated.job} className={"badge-default"} color={getPosteColor(updated.job)} />,
+          interview_status: updated.interview_status,
+          interview_decision: updated.interview_decision,
+        }) : item));
+      })
+      .subscribe();
+
+    return () => { try { channel.unsubscribe(); } catch { } };
   }, []);
 
   const updateInterviewField = async (id, field, value) => {
+    // optimistic
+    setCandidates(prev => prev.map(c => c.id === id ? { ...c, [field]: value } : c));
+    setFilteredCandidates(prev => prev.map(c => c.id === id ? { ...c, [field]: value } : c));
     try {
-      await supabaseUpdateCandidate({ id, [field]: value });
-      setCandidates(prev =>
-        prev.map(c => c.id === id ? { ...c, [field]: value } : c)
-      );
+      const res = await supabaseUpdateCandidate({ id, [field]: value });
+      if (!res) console.error(`Update didn't return data for ${field}`, id);
     } catch (error) {
       console.error(`Erreur lors de la mise à jour de ${field} :`, error);
     }

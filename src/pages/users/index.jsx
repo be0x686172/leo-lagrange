@@ -7,6 +7,7 @@ import { Pen } from 'lucide-react';
 import BadgeUI from '../../components/ui/badge';
 import { getRoleColor } from '../../constants/colors';
 import { supabaseGetUsers } from '../../services/supabase/supabaseUsersDatabase';
+import { supabase } from '../../services/supabase/supabaseClient';
 import EditUserModal from '../../modals/edit-user';
 
 const UsersPage = () => {
@@ -52,6 +53,35 @@ const UsersPage = () => {
                 setSlice([0, 0]);
             }
         })
+        .catch(()=>{})
+
+        const channel = supabase
+            .channel('public:users')
+            .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'users' }, (payload) => {
+                const updated = payload.new;
+                setUsers(prev => prev.map(u => {
+                    if (u.id !== updated.id) return u;
+                    return {
+                        ...u,
+                        name: updated.name ? updated.name.toUpperCase() : u.name,
+                        firstname: updated.firstname,
+                        role: updated.role ? <BadgeUI text={updated.role} className={"badge-default"} color={getRoleColor(updated.role)} /> : <BadgeUI text={"Aucun statut"} className={"badge-default"} />,
+                        candidates_access: updated.candidates_access ? <BadgeUI text={"OUI"} className={"badge-secondary"} /> : <BadgeUI text={"NON"} className={"badge-primary-false"} />,
+                        interviews_access: updated.interviews_access ? <BadgeUI text={"OUI"} className={"badge-secondary"} /> : <BadgeUI text={"NON"} className={"badge-primary-false"} />,
+                    };
+                }));
+                setFilteredUsers(prev => prev.map(u => (u.id === updated.id ? ({
+                    ...u,
+                    name: updated.name ? updated.name.toUpperCase() : u.name,
+                    firstname: updated.firstname,
+                    role: updated.role ? <BadgeUI text={updated.role} className={"badge-default"} color={getRoleColor(updated.role)} /> : <BadgeUI text={"Aucun statut"} className={"badge-default"} />,
+                    candidates_access: updated.candidates_access ? <BadgeUI text={"OUI"} className={"badge-secondary"} /> : <BadgeUI text={"NON"} className={"badge-primary-false"} />,
+                    interviews_access: updated.interviews_access ? <BadgeUI text={"OUI"} className={"badge-secondary"} /> : <BadgeUI text={"NON"} className={"badge-primary-false"} />,
+                }) : u)));
+            })
+            .subscribe();
+
+        return () => { try { channel.unsubscribe(); } catch { } };
     }, []);
 
     // Fonction de recherche et filtrage

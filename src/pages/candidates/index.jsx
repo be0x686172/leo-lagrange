@@ -4,6 +4,7 @@ import BadgeUI from '../../components/ui/badge';
 import { getPosteColor } from '../../constants/colors';
 import { Hourglass } from 'lucide-react';
 import { supabaseGetCandidates, supabaseUpdateCandidate } from '../../services/supabase/supabaseCandidatesDatabase';
+import { supabase } from '../../services/supabase/supabaseClient';
 import SelectUI from '../../components/ui/select';
 
 // colors imported from src/constants/colors.js
@@ -29,12 +30,12 @@ const CandidatesPage = () => {
     const data = await supabaseGetCandidates();
     // Filtrer les candidats SANS date d'entretien
     const candidatesWithoutInterview = data.filter(candidat => !candidat.interview_date);
-    
-    const transformedData = candidatesWithoutInterview.map((candidat) => ({
+
+    const transform = (candidat) => ({
       id: candidat.id,
       "⏳": <Hourglass color="#c4c4c4ff" size={19} />,
       interviews_date: candidat.application_date,
-      name: candidat.name.toUpperCase(),
+      name: candidat.name ? candidat.name.toUpperCase() : '-',
       firstname: candidat.firstname,
       job: (
         <BadgeUI
@@ -44,7 +45,9 @@ const CandidatesPage = () => {
         />
       ),
       application_status: candidat.application_status,
-    }));
+    });
+
+    const transformedData = candidatesWithoutInterview.map(transform);
     setCandidates(transformedData);
     setFilteredCandidates(transformedData);
     setLoading(false);
@@ -52,14 +55,50 @@ const CandidatesPage = () => {
 
   useEffect(() => {
     loadCandidates();
+
+    const channel = supabase
+      .channel('public:candidates')
+      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'candidates' }, (payload) => {
+        const updated = payload.new;
+        setCandidates(prev => prev.map(item => {
+          if (item.id !== updated.id) return item;
+          return {
+            ...item,
+            interviews_date: updated.application_date,
+            name: updated.name ? updated.name.toUpperCase() : item.name,
+            firstname: updated.firstname,
+            job: (
+              <BadgeUI text={updated.job} className={'badge-default'} color={getPosteColor(updated.job)} />
+            ),
+            application_status: updated.application_status,
+          };
+        }));
+        setFilteredCandidates(prev => prev.map(item => item.id === updated.id ? ({
+          ...item,
+          interviews_date: updated.application_date,
+          name: updated.name ? updated.name.toUpperCase() : item.name,
+          firstname: updated.firstname,
+          job: (
+            <BadgeUI text={updated.job} className={'badge-default'} color={getPosteColor(updated.job)} />
+          ),
+          application_status: updated.application_status,
+        }) : item));
+      })
+      .subscribe();
+
+    return () => {
+      try { channel.unsubscribe(); } catch { /* ignore */ }
+    };
   }, []);
 
   const updateStatus = async (id, newStatus) => {
+    // Optimistic update
+    setCandidates(prev => prev.map(c => c.id === id ? { ...c, application_status: newStatus } : c));
+    setFilteredCandidates(prev => prev.map(c => c.id === id ? { ...c, application_status: newStatus } : c));
+
     try {
-      await supabaseUpdateCandidate({ id, application_status: newStatus });
-      setCandidates(prev =>
-        prev.map(c => c.id === id ? { ...c, application_status: newStatus } : c)
-      );
+      const res = await supabaseUpdateCandidate({ id, application_status: newStatus });
+      if (!res) console.error('Update did not return data for candidate', id);
     } catch (error) {
       console.error("Erreur lors de la mise à jour du statut:", error);
     }
